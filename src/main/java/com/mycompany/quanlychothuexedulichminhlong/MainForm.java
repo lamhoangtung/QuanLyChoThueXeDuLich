@@ -25,6 +25,8 @@ public class MainForm extends javax.swing.JFrame {
         panelXe.setVisible(false);
         panelDonHang.setVisible(true);
         updateTableDonHang();
+        updateTableKhachHang();
+        updateTableXe();
     }
 
     /**
@@ -597,14 +599,8 @@ public class MainForm extends javax.swing.JFrame {
     private void btnSuaXeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaXeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSuaXeActionPerformed
-
-    private void btnXeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXeActionPerformed
-        // TODO add your handling code here:
-        panelDonHang.setVisible(false);
-        panelKhachHang.setVisible(false);
-        panelXe.setVisible(true);
-    }//GEN-LAST:event_btnXeActionPerformed
-
+    
+    
     private void updateTableDonHang(){
         String []colsName = {"Mã đơn", "Mã khách hàng", "Biển số xe", "Điểm đi", "Điểm đến", "Ngày đi", "Ngày về", "Giá", "Trạng thái"};
         DefaultTableModel tableModel = new DefaultTableModel();
@@ -628,7 +624,55 @@ public class MainForm extends javax.swing.JFrame {
         jTable3.setModel(tableModel);
         tableModel.fireTableDataChanged();
     }
+
+    private void updateTableKhachHang(){
+        String []colsName = {"Mã khách hàng", "Họ và tên", "Số điện thoại", "Địa chỉ", "Số lần thuê trước đó"};
+        DefaultTableModel tableModel = new DefaultTableModel();
+        tableModel.setColumnIdentifiers(colsName);
+        BULKhachHang bul = new BULKhachHang();
+        List<KhachHang> res = bul.layKhachHang();
+        for (int i=0; i<res.size(); i++){
+            KhachHang kh = res.get(i);
+            tableModel.addRow(new Object[]{
+                kh.getMaKH(),
+                kh.getHoTen(),
+                kh.getSDT(),
+                kh.getDiaChi()
+            });
+        }
+        jTable5.setModel(tableModel);
+        tableModel.fireTableDataChanged();
+    }
     
+    
+    private void updateTableXe(){
+        String []colsName = {"Biển số", "Loại xe", "Số chỗ", "Trạng thái"};
+        DefaultTableModel tableModel = new DefaultTableModel();
+        tableModel.setColumnIdentifiers(colsName);
+        BULXe bul = new BULXe();
+        List<Xe> res = bul.layXe();
+        for (int i=0; i<res.size(); i++){
+            Xe xe = res.get(i);
+            tableModel.addRow(new Object[]{
+                xe.getBienSo(),
+                xe.getLoaiXe(),
+                xe.getSoCho(),
+                ""
+            });
+        }
+        jTable4.setModel(tableModel);
+        tableModel.fireTableDataChanged();
+    }    
+    
+    
+    private void btnXeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXeActionPerformed
+        // TODO add your handling code here:
+        panelDonHang.setVisible(false);
+        panelKhachHang.setVisible(false);
+        panelXe.setVisible(true);
+        updateTableXe();
+    }//GEN-LAST:event_btnXeActionPerformed
+
     private void btnDonHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDonHangActionPerformed
         // TODO add your handling code here:
         panelXe.setVisible(false);
@@ -642,6 +686,7 @@ public class MainForm extends javax.swing.JFrame {
         panelXe.setVisible(false);
         panelDonHang.setVisible(false);
         panelKhachHang.setVisible(true);
+        updateTableKhachHang();
     }//GEN-LAST:event_btnKhachHangActionPerformed
 
     private void jTable3ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTable3ComponentShown
