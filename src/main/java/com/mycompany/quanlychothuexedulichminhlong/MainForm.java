@@ -105,6 +105,11 @@ public class MainForm extends javax.swing.JFrame {
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         btnThemDonHang.setText("Thêm đơn hàng");
+        btnThemDonHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemDonHangActionPerformed(evt);
+            }
+        });
 
         btnSuaDonHang.setText("Sửa đơn hàng");
 
@@ -601,7 +606,7 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSuaXeActionPerformed
     
     
-    private void updateTableDonHang(){
+    public void updateTableDonHang(){
         String []colsName = {"Mã đơn", "Mã khách hàng", "Biển số xe", "Điểm đi", "Điểm đến", "Ngày đi", "Ngày về", "Giá", "Trạng thái"};
         DefaultTableModel tableModel = new DefaultTableModel();
         tableModel.setColumnIdentifiers(colsName);
@@ -625,7 +630,7 @@ public class MainForm extends javax.swing.JFrame {
         tableModel.fireTableDataChanged();
     }
 
-    private void updateTableKhachHang(){
+    public void updateTableKhachHang(){
         String []colsName = {"Mã khách hàng", "Họ và tên", "Số điện thoại", "Địa chỉ", "Số lần thuê trước đó"};
         DefaultTableModel tableModel = new DefaultTableModel();
         tableModel.setColumnIdentifiers(colsName);
@@ -645,7 +650,7 @@ public class MainForm extends javax.swing.JFrame {
     }
     
     
-    private void updateTableXe(){
+    public void updateTableXe(){
         String []colsName = {"Biển số", "Loại xe", "Số chỗ", "Trạng thái"};
         DefaultTableModel tableModel = new DefaultTableModel();
         tableModel.setColumnIdentifiers(colsName);
@@ -692,6 +697,12 @@ public class MainForm extends javax.swing.JFrame {
     private void jTable3ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTable3ComponentShown
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable3ComponentShown
+
+    private void btnThemDonHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDonHangActionPerformed
+        // TODO add your handling code here:
+        ThemDonHang tdhForm = new ThemDonHang(this);
+        tdhForm.setVisible(true);
+    }//GEN-LAST:event_btnThemDonHangActionPerformed
 
     /**
      * @param args the command line arguments

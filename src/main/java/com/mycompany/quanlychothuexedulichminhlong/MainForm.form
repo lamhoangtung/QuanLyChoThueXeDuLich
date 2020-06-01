@@ -125,6 +125,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Th&#xea;m &#x111;&#x1a1;n h&#xe0;ng"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemDonHangActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnSuaDonHang">
       <Properties>
