@@ -109,13 +109,13 @@ public class DALXe {
     
     public void themXe(Xe xe){
         try {
-            String query = String.format("INSERT INTO xe VALUES(%s, %d, %s)",
+            String query = String.format("INSERT INTO xe VALUES('%s', '%d', '%s')",
                     xe.getBienSo(),
                     xe.getSoCho(),
                     xe.getLoaiXe());
             Connector.openConnection();
             Statement stmt = Connector.conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
+            stmt.execute(query);
             Connector.closeConnection();
         } catch (SQLException ex) {
             Logger.getLogger(DALXe.class.getName()).log(Level.SEVERE, null, ex);

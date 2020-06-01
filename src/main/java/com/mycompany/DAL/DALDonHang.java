@@ -77,7 +77,7 @@ public class DALDonHang {
     
     public void themDonHang(DonHang donHang){
         try {
-            String query = String.format("INSERT INTO don_hang VALUES(%d, %d, %s, %s, %s, %s, %s, %d, %d)",
+            String query = String.format("INSERT INTO don_hang VALUES('%d', '%d', '%s', '%s', '%s', '%s', '%s', '%d', '%d')",
                     donHang.getMaDon(),
                     donHang.getMaKH(),
                     donHang.getBienSo(),
@@ -89,7 +89,7 @@ public class DALDonHang {
                     donHang.getTrangThai());
             Connector.openConnection();
             Statement stmt = Connector.conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
+            stmt.execute(query);
             Connector.closeConnection();
         } catch (SQLException ex) {
             Logger.getLogger(DALDonHang.class.getName()).log(Level.SEVERE, null, ex);

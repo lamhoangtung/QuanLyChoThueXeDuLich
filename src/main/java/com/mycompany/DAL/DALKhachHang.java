@@ -93,7 +93,7 @@ public class DALKhachHang {
     
     public void themKhachHang(KhachHang khachHang){
         try {
-            String query = String.format("INSERT INTO khach_hang VALUES(%d, %s, %d, %s, %d)",
+            String query = String.format("INSERT INTO khach_hang VALUES('%d', '%s', '%d', '%s', '%d')",
                     khachHang.getMaKH(),
                     khachHang.getHoTen(),
                     khachHang.getSDT(),
@@ -101,7 +101,7 @@ public class DALKhachHang {
                     khachHang.getSoLanDatXe());
             Connector.openConnection();
             Statement stmt = Connector.conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
+            stmt.execute(query);
             Connector.closeConnection();
         } catch (SQLException ex) {
             Logger.getLogger(DALKhachHang.class.getName()).log(Level.SEVERE, null, ex);
