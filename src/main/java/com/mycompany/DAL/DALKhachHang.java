@@ -111,7 +111,7 @@ public class DALKhachHang {
     
     public void suaKhachHang(KhachHang khachHang){
         try {
-            String query = String.format("UPDATE khach_hang SET HoTen=%s, SDT=%d, DiaChi=%s, SoLanDatXe=%d where MaKH=@MaKH)",
+            String query = String.format("UPDATE khach_hang SET HoTen=%s, SDT=%d, DiaChi=%s, SoLanDatXe=%d where MaKH=%s",
                     khachHang.getHoTen(),
                     khachHang.getSDT(),
                     khachHang.getDiaChi(),
@@ -129,7 +129,7 @@ public class DALKhachHang {
     
     public void xoaKhachHang(KhachHang khachHang){
         try {
-            String query = String.format("DELETE FROM khach_hang where MaKH=@MaKH)", khachHang.getMaKH());
+            String query = String.format("DELETE FROM khach_hang where MaKH=%s", khachHang.getMaKH());
             Connector.openConnection();
             Statement stmt = Connector.conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
