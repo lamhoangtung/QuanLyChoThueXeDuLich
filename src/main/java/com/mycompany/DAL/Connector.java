@@ -19,7 +19,7 @@ public class Connector {
 
     public static void openConnection() {
         try{
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             Connector.conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ql_thuexe_minhlong", Connector.user, Connector.password);
             System.out.println("Ket noi CSDL thanh cong");
             
