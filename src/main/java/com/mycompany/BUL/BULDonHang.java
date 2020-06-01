@@ -14,6 +14,10 @@ import java.util.List;
 public class BULDonHang {
     DALDonHang dalDonHang = new DALDonHang();
     
+    public List<DonHang> layDonHang(){
+        return dalDonHang.layDonHang();
+    }
+    
     public List<DonHang> layDonHangTheoMa(int MaDon){
         return dalDonHang.layDonHangTheoMa(MaDon);
     }

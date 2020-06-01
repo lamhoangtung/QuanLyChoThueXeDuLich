@@ -19,6 +19,34 @@ import java.util.logging.Logger;
  */
 public class DALDonHang {
     
+    public List<DonHang> layDonHang(){
+        try {
+            List<DonHang> arr = new ArrayList<DonHang>();
+            String query = "SELECT * FROM don_hang";
+            Connector.openConnection();
+            Statement stmt = Connector.conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()){
+                int MaDon = rs.getInt("MaDon");
+                int MaKH = rs.getInt("MaKH");
+                String BienSo = rs.getString("BienSo");
+                String DiemDi = rs.getString("DiemDi");
+                String DiemDen = rs.getString("DiemDen");
+                String NgayDi = rs.getString("NgayDi");
+                String NgayVe = rs.getString("NgayVe");
+                long Gia = rs.getLong("Gia");
+                int TrangThai = rs.getInt("TrangThai");
+                DonHang temp = new DonHang(MaDon, MaKH, BienSo, DiemDi, DiemDen, NgayDi, NgayVe, Gia, TrangThai);
+                arr.add(temp);
+            }
+            Connector.closeConnection();
+            return arr;
+        } catch (SQLException ex) {
+            Logger.getLogger(DALDonHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }    
+    
     public List<DonHang> layDonHangTheoMa(int MaDonQ){
         try {
             List<DonHang> arr = new ArrayList<DonHang>();
