@@ -4,6 +4,11 @@
  * and open the template in the editor.
  */
 package com.mycompany.quanlychothuexedulichminhlong;
+import com.mycompany.BUL.*;
+import com.mycompany.DTO.*;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -19,6 +24,7 @@ public class MainForm extends javax.swing.JFrame {
         panelKhachHang.setVisible(false);
         panelXe.setVisible(false);
         panelDonHang.setVisible(true);
+        updateTableDonHang();
     }
 
     /**
@@ -168,30 +174,21 @@ public class MainForm extends javax.swing.JFrame {
                 "Mã đơn", "Mã khách hàng", "Biển số xe", "Điểm đi", "Điểm đến", "Ngày đi", "Ngày về", "Giá", "Trạng thái"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class, java.lang.Integer.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, true, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
         jTable3.setShowGrid(true);
+        jTable3.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jTable3ComponentShown(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTable3);
-        if (jTable3.getColumnModel().getColumnCount() > 0) {
-            jTable3.getColumnModel().getColumn(0).setResizable(false);
-            jTable3.getColumnModel().getColumn(0).setHeaderValue("Mã đơn");
-            jTable3.getColumnModel().getColumn(6).setHeaderValue("Ngày về");
-            jTable3.getColumnModel().getColumn(7).setHeaderValue("Giá");
-            jTable3.getColumnModel().getColumn(8).setHeaderValue("Trạng thái");
-        }
 
         javax.swing.GroupLayout panelDonHangLayout = new javax.swing.GroupLayout(panelDonHang);
         panelDonHang.setLayout(panelDonHangLayout);
@@ -302,9 +299,6 @@ public class MainForm extends javax.swing.JFrame {
         });
         jTable4.setShowGrid(true);
         jScrollPane4.setViewportView(jTable4);
-        if (jTable4.getColumnModel().getColumnCount() > 0) {
-            jTable4.getColumnModel().getColumn(3).setHeaderValue("Trạng thái");
-        }
 
         javax.swing.GroupLayout panelXeLayout = new javax.swing.GroupLayout(panelXe);
         panelXe.setLayout(panelXeLayout);
@@ -611,11 +605,36 @@ public class MainForm extends javax.swing.JFrame {
         panelXe.setVisible(true);
     }//GEN-LAST:event_btnXeActionPerformed
 
+    private void updateTableDonHang(){
+        String []colsName = {"Mã đơn", "Mã khách hàng", "Biển số xe", "Điểm đi", "Điểm đến", "Ngày đi", "Ngày về", "Giá", "Trạng thái"};
+        DefaultTableModel tableModel = new DefaultTableModel();
+        tableModel.setColumnIdentifiers(colsName);
+        BULDonHang bul = new BULDonHang();
+        List<DonHang> res = bul.layDonHang();
+        for (int i=0; i<res.size(); i++){
+            DonHang dh = res.get(i);
+            tableModel.addRow(new Object[]{
+                dh.getMaDon(),
+                dh.getMaKH(),
+                dh.getBienSo(),
+                dh.getDiemDi(),
+                dh.getDiemDen(),
+                dh.getNgayDi(),
+                dh.getNgayVe(),
+                dh.getGia(),
+                dh.getTrangThai()
+            });
+        }
+        jTable3.setModel(tableModel);
+        tableModel.fireTableDataChanged();
+    }
+    
     private void btnDonHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDonHangActionPerformed
         // TODO add your handling code here:
         panelXe.setVisible(false);
         panelKhachHang.setVisible(false);
         panelDonHang.setVisible(true);
+        updateTableDonHang();
     }//GEN-LAST:event_btnDonHangActionPerformed
 
     private void btnKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhachHangActionPerformed
@@ -624,6 +643,10 @@ public class MainForm extends javax.swing.JFrame {
         panelDonHang.setVisible(false);
         panelKhachHang.setVisible(true);
     }//GEN-LAST:event_btnKhachHangActionPerformed
+
+    private void jTable3ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTable3ComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable3ComponentShown
 
     /**
      * @param args the command line arguments
