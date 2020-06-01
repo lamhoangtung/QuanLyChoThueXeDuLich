@@ -17,9 +17,9 @@ import java.util.logging.Logger;
  *
  * @author linus
  */
-public class DALChiTietDonHang {
+public class DALDonHang {
     
-    public List<DonHang> layChiTietDonHangTheoMa(int MaDonQ){
+    public List<DonHang> layDonHangTheoMa(int MaDonQ){
         try {
             List<DonHang> arr = new ArrayList<DonHang>();
             String query = String.format("SELECT * FROM don_hang WHERE MaDon=%d", MaDonQ);
@@ -42,12 +42,12 @@ public class DALChiTietDonHang {
             Connector.closeConnection();
             return arr;
         } catch (SQLException ex) {
-            Logger.getLogger(DALChiTietDonHang.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DALDonHang.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
     
-    public void themChiTietDonHang(DonHang donHang){
+    public void themDonHang(DonHang donHang){
         try {
             String query = String.format("INSERT INTO don_hang VALUES(%d, %d, %s, %s, %s, %s, %s, %d, %d)",
                     donHang.getMaDon(),
@@ -64,7 +64,7 @@ public class DALChiTietDonHang {
             ResultSet rs = stmt.executeQuery(query);
             Connector.closeConnection();
         } catch (SQLException ex) {
-            Logger.getLogger(DALChiTietDonHang.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DALDonHang.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
