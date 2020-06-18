@@ -23,6 +23,7 @@ public class ThemDonHang extends javax.swing.JFrame {
     public ThemDonHang(MainForm mainForm) {
         initComponents();
         this.mainForm = mainForm;
+        this.setDefaultCloseOperation(ThemDonHang.DISPOSE_ON_CLOSE );
     }
 
     /**
@@ -270,6 +271,7 @@ public class ThemDonHang extends javax.swing.JFrame {
             bul.themDonHang(donhang);
             this.setVisible(false);
             this.mainForm.updateTableDonHang();
+            this.dispose();
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
@@ -312,6 +314,10 @@ public class ThemDonHang extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
         this.setVisible(false);
+        this.mainForm.setVisible(true);
+        System.out.println("lololols");
+        this.mainForm.updateTableDonHang();
+        this.dispose();
     }//GEN-LAST:event_formWindowClosing
 
     /**
