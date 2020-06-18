@@ -23,6 +23,7 @@ public class MainForm extends javax.swing.JFrame {
         initComponents();
         panelKhachHang.setVisible(false);
         panelXe.setVisible(false);
+        panelThongKe.setVisible(false);
         panelDonHang.setVisible(true);
         updateTableDonHang();
         updateTableKhachHang();
