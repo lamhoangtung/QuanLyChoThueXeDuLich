@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -75,24 +76,20 @@ public class DALDonHang {
         return null;
     }
     
-    public void themDonHang(DonHang donHang){
-        try {
-            String query = String.format("INSERT INTO don_hang VALUES('%d', '%d', '%s', '%s', '%s', '%s', '%s', '%d', '%d')",
-                    donHang.getMaDon(),
-                    donHang.getMaKH(),
-                    donHang.getBienSo(),
-                    donHang.getDiemDi(),
-                    donHang.getDiemDen(),
-                    donHang.getNgayDi(),
-                    donHang.getNgayVe(),
-                    donHang.getGia(),
-                    donHang.getTrangThai());
-            Connector.openConnection();
-            Statement stmt = Connector.conn.createStatement();
-            stmt.execute(query);
-            Connector.closeConnection();
-        } catch (SQLException ex) {
-            Logger.getLogger(DALDonHang.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void themDonHang(DonHang donHang) throws SQLException{
+        String query = String.format("INSERT INTO don_hang VALUES('%d', '%d', '%s', '%s', '%s', '%s', '%s', '%d', '%d')",
+                donHang.getMaDon(),
+                donHang.getMaKH(),
+                donHang.getBienSo(),
+                donHang.getDiemDi(),
+                donHang.getDiemDen(),
+                donHang.getNgayDi(),
+                donHang.getNgayVe(),
+                donHang.getGia(),
+                donHang.getTrangThai());
+        Connector.openConnection();
+        Statement stmt = Connector.conn.createStatement();
+        stmt.execute(query);
+        Connector.closeConnection();
     }
 }

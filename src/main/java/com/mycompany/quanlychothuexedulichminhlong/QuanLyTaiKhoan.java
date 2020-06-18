@@ -14,8 +14,13 @@ public class QuanLyTaiKhoan extends javax.swing.JFrame {
     /**
      * Creates new form QuanLyTaiKhoan
      */
-    public QuanLyTaiKhoan() {
+    
+    MainForm mainForm = null;
+    
+    public QuanLyTaiKhoan(MainForm mainForm) {
         initComponents();
+        this.mainForm = mainForm;
+        this.setDefaultCloseOperation(ThemDonHang.DISPOSE_ON_CLOSE );
     }
 
     /**
@@ -75,6 +80,11 @@ public class QuanLyTaiKhoan extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("Thêm");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Sửa");
 
@@ -152,6 +162,10 @@ public class QuanLyTaiKhoan extends javax.swing.JFrame {
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
