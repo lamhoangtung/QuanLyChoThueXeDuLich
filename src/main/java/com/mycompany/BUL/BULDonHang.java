@@ -6,6 +6,7 @@
 package com.mycompany.BUL;
 import com.mycompany.DAL.DALDonHang;
 import com.mycompany.DTO.DonHang;
+import java.sql.SQLException;
 import java.util.List;
 /**
  *
@@ -22,7 +23,15 @@ public class BULDonHang {
         return dalDonHang.layDonHangTheoMa(MaDon);
     }
     
-    public void themDonHang(DonHang donHang){
+    public void themDonHang(DonHang donHang) throws SQLException{
         dalDonHang.themDonHang(donHang);
+    }
+    
+    public void suaDonHang(DonHang donHang) throws SQLException{
+        dalDonHang.suaDonHang(donHang);
+    }
+    
+    public void xoaDonHang(DonHang donHang) throws SQLException{
+        dalDonHang.xoaDonHang(donHang);
     }
 }

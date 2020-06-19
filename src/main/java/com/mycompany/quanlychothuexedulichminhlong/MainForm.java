@@ -7,6 +7,8 @@ package com.mycompany.quanlychothuexedulichminhlong;
 import com.mycompany.BUL.*;
 import com.mycompany.DTO.*;
 import java.util.List;
+import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -140,8 +142,18 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         btnSuaDonHang.setText("Sửa đơn hàng");
+        btnSuaDonHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaDonHangActionPerformed(evt);
+            }
+        });
 
         btnXoaDonHang.setText("Xoá đơn hàng");
+        btnXoaDonHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaDonHangActionPerformed(evt);
+            }
+        });
 
         btnKhachHang.setText("Khách hàng");
         btnKhachHang.addActionListener(new java.awt.event.ActionListener() {
@@ -932,7 +944,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void btnThemDonHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDonHangActionPerformed
         // TODO add your handling code here:
-        ThemDonHang tdhForm = new ThemDonHang(this);
+        SuaDonHang tdhForm = new SuaDonHang(this);
         tdhForm.setVisible(true);
     }//GEN-LAST:event_btnThemDonHangActionPerformed
 
@@ -953,6 +965,21 @@ public class MainForm extends javax.swing.JFrame {
         QuanLyTaiKhoan qltkForm = new QuanLyTaiKhoan(this);
         qltkForm.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnXoaDonHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaDonHangActionPerformed
+        // TODO add your handling code here:     
+        JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xoá đơn hàng không ?","Cảnh báo", JOptionPane.YES_NO_OPTION);
+        DefaultTableModel model = (DefaultTableModel)jTable6.getModel();
+        System.out.println(jTable6.getSelectedRow());
+        System.out.println(model.getDataVector().get(jTable6.getSelectedRow()));
+    }//GEN-LAST:event_btnXoaDonHangActionPerformed
+
+    private void btnSuaDonHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaDonHangActionPerformed
+        // TODO add your handling code here:
+        SuaDonHang sdhForm = new SuaDonHang(this);
+        sdhForm.setVisible(true);
+                
+    }//GEN-LAST:event_btnSuaDonHangActionPerformed
 
     /**
      * @param args the command line arguments

@@ -148,11 +148,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="S&#x1eed;a &#x111;&#x1a1;n h&#xe0;ng"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSuaDonHangActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnXoaDonHang">
       <Properties>
         <Property name="text" type="java.lang.String" value="Xo&#xe1; &#x111;&#x1a1;n h&#xe0;ng"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXoaDonHangActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnKhachHang">
       <Properties>

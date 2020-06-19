@@ -6,16 +6,20 @@
 package com.mycompany.quanlychothuexedulichminhlong;
 import com.mycompany.BUL.*;
 import com.mycompany.DTO.*;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 
 /**
  *
  * @author linus
  */
-public class ThemDonHang extends javax.swing.JFrame {
+public class SuaDonHang extends javax.swing.JFrame {
 
     /**
      * Creates new form ThemDonHangg
@@ -23,17 +27,17 @@ public class ThemDonHang extends javax.swing.JFrame {
     
     MainForm mainForm = null;
     
-    public ThemDonHang(){
+    public SuaDonHang(){
         initComponents();
         loadComboBox();
-        this.setDefaultCloseOperation(ThemDonHang.DISPOSE_ON_CLOSE );
+        this.setDefaultCloseOperation(SuaDonHang.DISPOSE_ON_CLOSE );
     }
     
-    public ThemDonHang(MainForm mainForm) {
+    public SuaDonHang(MainForm mainForm) {
         initComponents();
         loadComboBox();
         this.mainForm = mainForm;
-        this.setDefaultCloseOperation(ThemDonHang.DISPOSE_ON_CLOSE );
+        this.setDefaultCloseOperation(SuaDonHang.DISPOSE_ON_CLOSE );
     }
 
     private void loadComboBox(){
@@ -77,7 +81,7 @@ public class ThemDonHang extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        btnThem = new javax.swing.JButton();
+        btnSua = new javax.swing.JButton();
         txtMaDon = new javax.swing.JTextField();
         txtDiemDen = new javax.swing.JTextField();
         txtDiemDi = new javax.swing.JTextField();
@@ -91,7 +95,7 @@ public class ThemDonHang extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Thêm đơn hàng");
+        setTitle("Sửa đơn hàng");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -116,10 +120,10 @@ public class ThemDonHang extends javax.swing.JFrame {
 
         jLabel9.setText("Trạng thái");
 
-        btnThem.setText("Thêm");
-        btnThem.addActionListener(new java.awt.event.ActionListener() {
+        btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemActionPerformed(evt);
+                btnSuaActionPerformed(evt);
             }
         });
 
@@ -201,7 +205,7 @@ public class ThemDonHang extends javax.swing.JFrame {
                             .addComponent(cmbMaKhachHang, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(206, 206, 206)
-                        .addComponent(btnThem)))
+                        .addComponent(btnSua)))
                 .addContainerGap(108, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -250,14 +254,14 @@ public class ThemDonHang extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(txtTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                .addComponent(btnThem)
+                .addComponent(btnSua)
                 .addGap(38, 38, 38))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
         
         boolean pass = true;
@@ -287,8 +291,18 @@ public class ThemDonHang extends javax.swing.JFrame {
         String BienSo = selected_item_list[1];
         String DiemDi = txtDiemDi.getText();
         String DiemDen = txtDiemDen.getText();
+        
+        DateValidator validator = new DateValidatorUsingDateFormat("yyyy/MM/dd");
         String NgayDi = txtNgayDi.getText();
+        if (validator.isValid(NgayDi) == 0){
+            pass = false;
+            JOptionPane.showMessageDialog(rootPane, "Ngày đi không hợp lệ! Vui lòng nhập đúng format yyyy/MM/dd", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
         String NgayVe = txtNgayVe.getText();
+        if (validator.isValid(NgayVe) == 0){
+            pass = false;
+            JOptionPane.showMessageDialog(rootPane, "Ngày về không hợp lệ! Vui lòng nhập đúng format yyyy/MM/dd", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
         long Gia = Long.parseLong(txtGia.getText());
         if (Gia < 0){
             pass = false;
@@ -299,17 +313,17 @@ public class ThemDonHang extends javax.swing.JFrame {
             DonHang donhang = new DonHang(MaDon, MaKH, BienSo, DiemDi, DiemDen, NgayDi, NgayVe, Gia, TrangThai);
             BULDonHang bul = new BULDonHang();
             try{
-                bul.themDonHang(donhang);
+                bul.suaDonHang(donhang);
             }
             catch(Exception ex){
                 System.out.println(ex);
-                JOptionPane.showMessageDialog(rootPane, "Đã có lỗi xảy ra!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(rootPane, String.format("Đã có lỗi xảy ra! %s", ex), "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
             this.setVisible(false);
             this.mainForm.updateTableDonHang();
             this.dispose();
         }
-    }//GEN-LAST:event_btnThemActionPerformed
+    }//GEN-LAST:event_btnSuaActionPerformed
 
     private void txtMaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaDonActionPerformed
         // TODO add your handling code here:
@@ -364,27 +378,29 @@ public class ThemDonHang extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ThemDonHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaDonHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ThemDonHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaDonHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ThemDonHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaDonHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ThemDonHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaDonHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ThemDonHang().setVisible(true);
+                new SuaDonHang().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnSua;
     private javax.swing.JComboBox<String> cmbBienSo;
     private javax.swing.JComboBox<String> cmbMaKhachHang;
     private javax.swing.JComboBox<String> jComboBox1;

@@ -20,7 +20,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="Th&#xea;m &#x111;&#x1a1;n h&#xe0;ng"/>
+    <Property name="title" type="java.lang.String" value="S&#x1eed;a &#x111;&#x1a1;n h&#xe0;ng"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -83,7 +83,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="206" max="-2" attributes="0"/>
-                      <Component id="btnThem" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnSua" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="108" max="32767" attributes="0"/>
@@ -149,7 +149,7 @@
                   <Component id="txtTrangThai" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="51" max="32767" attributes="0"/>
-              <Component id="btnThem" min="-2" max="-2" attributes="0"/>
+              <Component id="btnSua" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -201,12 +201,12 @@
         <Property name="text" type="java.lang.String" value="Tr&#x1ea1;ng th&#xe1;i"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnThem">
+    <Component class="javax.swing.JButton" name="btnSua">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
+        <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSuaActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtMaDon">

@@ -17,10 +17,15 @@ public class QuanLyTaiKhoan extends javax.swing.JFrame {
     
     MainForm mainForm = null;
     
+    public QuanLyTaiKhoan() {
+        initComponents();
+        this.setDefaultCloseOperation(SuaDonHang.DISPOSE_ON_CLOSE );
+    }
+    
     public QuanLyTaiKhoan(MainForm mainForm) {
         initComponents();
         this.mainForm = mainForm;
-        this.setDefaultCloseOperation(ThemDonHang.DISPOSE_ON_CLOSE );
+        this.setDefaultCloseOperation(SuaDonHang.DISPOSE_ON_CLOSE );
     }
 
     /**

@@ -6,10 +6,14 @@
 package com.mycompany.quanlychothuexedulichminhlong;
 import com.mycompany.BUL.*;
 import com.mycompany.DTO.*;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 
 /**
  *
@@ -287,8 +291,18 @@ public class ThemDonHang extends javax.swing.JFrame {
         String BienSo = selected_item_list[1];
         String DiemDi = txtDiemDi.getText();
         String DiemDen = txtDiemDen.getText();
+        
+        DateValidator validator = new DateValidatorUsingDateFormat("yyyy/MM/dd");
         String NgayDi = txtNgayDi.getText();
+        if (validator.isValid(NgayDi) == 0){
+            pass = false;
+            JOptionPane.showMessageDialog(rootPane, "Ngày đi không hợp lệ! Vui lòng nhập đúng format yyyy/MM/dd", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
         String NgayVe = txtNgayVe.getText();
+        if (validator.isValid(NgayVe) == 0){
+            pass = false;
+            JOptionPane.showMessageDialog(rootPane, "Ngày về không hợp lệ! Vui lòng nhập đúng format yyyy/MM/dd", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
         long Gia = Long.parseLong(txtGia.getText());
         if (Gia < 0){
             pass = false;
@@ -303,7 +317,7 @@ public class ThemDonHang extends javax.swing.JFrame {
             }
             catch(Exception ex){
                 System.out.println(ex);
-                JOptionPane.showMessageDialog(rootPane, "Đã có lỗi xảy ra!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(rootPane, String.format("Đã có lỗi xảy ra! %s", ex), "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
             this.setVisible(false);
             this.mainForm.updateTableDonHang();
@@ -372,6 +386,12 @@ public class ThemDonHang extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ThemDonHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
