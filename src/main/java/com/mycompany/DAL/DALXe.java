@@ -44,7 +44,7 @@ public class DALXe {
     public List<Xe> layXeTheoBienSo(String BienSoQ){
         try {
             List<Xe> arr = new ArrayList<Xe>();
-            String query = String.format("SELECT * FROM xe WHERE BienSo LIKE %s + '%'", BienSoQ);
+            String query = String.format("SELECT * FROM xe WHERE BienSo = '%s'", BienSoQ);
             Connector.openConnection();
             Statement stmt = Connector.conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);

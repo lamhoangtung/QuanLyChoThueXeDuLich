@@ -45,7 +45,7 @@ public class DALKhachHang {
     public List<KhachHang> layKhachHangTheoMa(int MaKHQ){
         try {
             List<KhachHang> arr = new ArrayList<KhachHang>();
-            String query = String.format("SELECT * FROM khach_hang WHERE MaKH LIKE %s + '%'", MaKHQ);
+            String query = String.format("SELECT * FROM khach_hang WHERE MaKH = '%s'", MaKHQ);
             Connector.openConnection();
             Statement stmt = Connector.conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);

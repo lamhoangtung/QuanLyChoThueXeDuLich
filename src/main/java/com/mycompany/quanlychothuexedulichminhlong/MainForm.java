@@ -907,16 +907,22 @@ public class MainForm extends javax.swing.JFrame {
     
     
     public void updateTableDonHang(){
-        String []colsName = {"Mã đơn", "Mã khách hàng", "Biển số xe", "Điểm đi", "Điểm đến", "Ngày đi", "Ngày về", "Giá", "Trạng thái"};
+        String []colsName = {"Mã đơn", "Mã khách hàng", "Tên khách hàng", "Loại Xe", "Biển số xe", "Điểm đi", "Điểm đến", "Ngày đi", "Ngày về", "Giá", "Trạng thái"};
         DefaultTableModel tableModel = new DefaultTableModel();
         tableModel.setColumnIdentifiers(colsName);
         BULDonHang bul = new BULDonHang();
+        BULKhachHang bulKH = new BULKhachHang();
+        BULXe bulXe = new BULXe();
         List<DonHang> res = bul.layDonHang();
         for (int i=0; i<res.size(); i++){
             DonHang dh = res.get(i);
+            KhachHang kh = bulKH.layKhachHangTheoMa(dh.getMaKH()).get(0);
+            Xe xe = bulXe.layXeTheoBienSo(dh.getBienSo()).get(0);
             tableModel.addRow(new Object[]{
                 dh.getMaDon(),
                 dh.getMaKH(),
+                kh.getHoTen(),
+                xe.getLoaiXe(),
                 dh.getBienSo(),
                 dh.getDiemDi(),
                 dh.getDiemDen(),
@@ -985,14 +991,21 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     public void updateTableDonHangBySearch(List<DonHang> res){
-        String []colsName = {"Mã đơn", "Mã khách hàng", "Biển số xe", "Điểm đi", "Điểm đến", "Ngày đi", "Ngày về", "Giá", "Trạng thái"};
+        String []colsName = {"Mã đơn", "Mã khách hàng", "Tên khách hàng", "Loại Xe", "Biển số xe", "Điểm đi", "Điểm đến", "Ngày đi", "Ngày về", "Giá", "Trạng thái"};
         DefaultTableModel tableModel = new DefaultTableModel();
         tableModel.setColumnIdentifiers(colsName);
+        BULDonHang bul = new BULDonHang();
+        BULKhachHang bulKH = new BULKhachHang();
+        BULXe bulXe = new BULXe();
         for (int i=0; i<res.size(); i++){
             DonHang dh = res.get(i);
+            KhachHang kh = bulKH.layKhachHangTheoMa(dh.getMaKH()).get(0);
+            Xe xe = bulXe.layXeTheoBienSo(dh.getBienSo()).get(0);
             tableModel.addRow(new Object[]{
                 dh.getMaDon(),
                 dh.getMaKH(),
+                kh.getHoTen(),
+                xe.getLoaiXe(),
                 dh.getBienSo(),
                 dh.getDiemDi(),
                 dh.getDiemDen(),
@@ -1101,18 +1114,10 @@ public class MainForm extends javax.swing.JFrame {
                 DefaultTableModel model = (DefaultTableModel)jTable3.getModel();
                 System.out.println(jTable3.getSelectedRow());
                 Vector data = (Vector) model.getDataVector().get(jTable3.getSelectedRow());
-                DonHang dh = new DonHang((int) data.elementAt(0),
-                                         (int) data.elementAt(1),
-                                         (String) data.elementAt(2),
-                                         (String) data.elementAt(3),
-                                         (String) data.elementAt(4),
-                                         (String) data.elementAt(5),
-                                         (String) data.elementAt(6),
-                                         (long) data.elementAt(7),
-                                         (String) data.elementAt(8));
+                int MaDH = (int) data.elementAt(0);
                 BULDonHang bul = new BULDonHang();
                 try{
-                    bul.xoaDonHang(dh);
+                    bul.xoaDonHang(MaDH);
                     JOptionPane.showMessageDialog(rootPane, "Xoá thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 }
                 catch(SQLException ex){

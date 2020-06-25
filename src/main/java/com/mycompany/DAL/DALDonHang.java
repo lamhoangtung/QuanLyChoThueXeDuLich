@@ -197,8 +197,8 @@ public class DALDonHang {
        Connector.closeConnection();
     }
     
-    public void xoaDonHang(DonHang donHang) throws SQLException{
-        String query = String.format("DELETE FROM don_hang where MaDon=%s", donHang.getMaDon());
+    public void xoaDonHang(int MaDH) throws SQLException{
+        String query = String.format("DELETE FROM don_hang where MaDon=%d", MaDH);
         Connector.openConnection();
         Statement stmt = Connector.conn.createStatement();
         stmt.execute(query);

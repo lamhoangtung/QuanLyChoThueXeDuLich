@@ -43,8 +43,8 @@ public class BULDonHang {
         dalDonHang.suaDonHang(donHang);
     }
     
-    public void xoaDonHang(DonHang donHang) throws SQLException{
-        dalDonHang.xoaDonHang(donHang);
+    public void xoaDonHang(int MaDH) throws SQLException{
+        dalDonHang.xoaDonHang(MaDH);
     }
     
     public List<DonHang> locDonHang(String BienSoXe, String MaKhachHang, String DiaDiem, String TuNgay, String DenNgay) throws SQLException{

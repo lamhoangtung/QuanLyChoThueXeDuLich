@@ -97,13 +97,13 @@ public class SuaDonHang extends javax.swing.JFrame {
         Vector data = (Vector) model.getDataVector().get(this.table.getSelectedRow());
         txtMaDon.setText((int) data.elementAt(0) + "");
         cmbMaKhachHang.setSelectedIndex(this.getCmbIndexByMaKH((int) data.elementAt(1), cmbMaKhachHang));
-        cmbBienSo.setSelectedIndex(this.getCmbIndexByBienSo((String) data.elementAt(2), cmbBienSo));
-        txtDiemDi.setText((String) data.elementAt(3));
-        txtDiemDen.setText((String) data.elementAt(4));
-        txtNgayDi.setText((String) data.elementAt(5));
-        txtNgayVe.setText((String) data.elementAt(6));
-        txtGia.setText((long) data.elementAt(7) + "");
-        cmbTrangThai.setSelectedItem((String) data.elementAt(8) + "");
+        cmbBienSo.setSelectedIndex(this.getCmbIndexByBienSo((String) data.elementAt(4), cmbBienSo));
+        txtDiemDi.setText((String) data.elementAt(5));
+        txtDiemDen.setText((String) data.elementAt(6));
+        txtNgayDi.setText((String) data.elementAt(7));
+        txtNgayVe.setText((String) data.elementAt(8));
+        txtGia.setText((long) data.elementAt(9) + "");
+        cmbTrangThai.setSelectedItem((String) data.elementAt(10) + "");
     }
     
     /**

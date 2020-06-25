@@ -21,7 +21,7 @@ public class Connector {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connector.conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ql_thuexe_minhlong", Connector.user, Connector.password);
-            System.out.println("Ket noi CSDL thanh cong");
+//            System.out.println("Ket noi CSDL thanh cong");
             
         }catch(Exception ex){
             System.out.println(ex.toString());
@@ -31,7 +31,7 @@ public class Connector {
     public static void closeConnection(){
         try{
             Connector.conn.close();
-            System.out.println("Dong ket noi CSDL thanh cong");
+//            System.out.println("Dong ket noi CSDL thanh cong");
             
         }catch(Exception ex){
             System.out.println(ex.toString());
