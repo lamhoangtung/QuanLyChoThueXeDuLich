@@ -233,7 +233,12 @@ public class QuanLyTaiKhoan extends javax.swing.JFrame {
                 bul.themTaiKhoan(acc);
                 JOptionPane.showMessageDialog(rootPane, String.format("Thêm thành công!"), "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(rootPane, String.format("Đã có lỗi xảy ra! %s", ex), "Lỗi", JOptionPane.ERROR_MESSAGE);
+                if (ex.toString().contains("Duplicate entry") && ex.toString().contains(".PRIMARY")){
+                    JOptionPane.showMessageDialog(rootPane, "Tên đăng nhập đã tồn tại!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(rootPane, String.format("Đã có lỗi xảy ra! %s", ex), "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
             }
             this.updateTableTaiKhoan();
         }
