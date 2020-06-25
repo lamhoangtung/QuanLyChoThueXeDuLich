@@ -968,27 +968,29 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnXoaDonHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaDonHangActionPerformed
-        // TODO add your handling code here:     
-        JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xoá đơn hàng không ?","Cảnh báo", JOptionPane.YES_NO_OPTION);
-        DefaultTableModel model = (DefaultTableModel)jTable3.getModel();
-        System.out.println(jTable3.getSelectedRow());
-        Vector data = (Vector) model.getDataVector().get(jTable3.getSelectedRow());
-        DonHang dh = new DonHang((int) data.elementAt(0),
-                                 (int) data.elementAt(1),
-                                 (String) data.elementAt(2),
-                                 (String) data.elementAt(3),
-                                 (String) data.elementAt(4),
-                                 (String) data.elementAt(5),
-                                 (String) data.elementAt(6),
-                                 (long) data.elementAt(7),
-                                 (int) data.elementAt(8));
-        BULDonHang bul = new BULDonHang();
-        try{
-            bul.xoaDonHang(dh);
-            JOptionPane.showMessageDialog(rootPane, "Xoá thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        }
-        catch(SQLException ex){
-            JOptionPane.showMessageDialog(rootPane, "Đã có lỗi xảy ra!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+        // TODO add your handling code here:
+        int confimed = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xoá đơn hàng không ?","Cảnh báo", JOptionPane.YES_NO_OPTION);
+        if (confimed == 0){
+            DefaultTableModel model = (DefaultTableModel)jTable3.getModel();
+            System.out.println(jTable3.getSelectedRow());
+            Vector data = (Vector) model.getDataVector().get(jTable3.getSelectedRow());
+            DonHang dh = new DonHang((int) data.elementAt(0),
+                                     (int) data.elementAt(1),
+                                     (String) data.elementAt(2),
+                                     (String) data.elementAt(3),
+                                     (String) data.elementAt(4),
+                                     (String) data.elementAt(5),
+                                     (String) data.elementAt(6),
+                                     (long) data.elementAt(7),
+                                     (int) data.elementAt(8));
+            BULDonHang bul = new BULDonHang();
+            try{
+                bul.xoaDonHang(dh);
+                JOptionPane.showMessageDialog(rootPane, "Xoá thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            }
+            catch(SQLException ex){
+                JOptionPane.showMessageDialog(rootPane, "Đã có lỗi xảy ra!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            }
         }
         this.updateTableDonHang();
     }//GEN-LAST:event_btnXoaDonHangActionPerformed
