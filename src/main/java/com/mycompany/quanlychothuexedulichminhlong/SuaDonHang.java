@@ -353,7 +353,15 @@ public class SuaDonHang extends javax.swing.JFrame {
             pass = false;
             JOptionPane.showMessageDialog(rootPane, "Giá không được âm!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
-        int TrangThai = Integer.parseInt(txtTrangThai.getText());
+        int TrangThai = 0;
+        try{
+            TrangThai = Integer.parseInt(txtTrangThai.getText());
+        }
+        catch(NumberFormatException ex){
+            pass = false;
+            JOptionPane.showMessageDialog(rootPane, "Trạng thái không hợp lệ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+
         if (pass){
             DonHang donhang = new DonHang(MaDon, MaKH, BienSo, DiemDi, DiemDen, NgayDi, NgayVe, Gia, TrangThai);
             BULDonHang bul = new BULDonHang();

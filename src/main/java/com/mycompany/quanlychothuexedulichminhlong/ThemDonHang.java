@@ -308,21 +308,35 @@ public class ThemDonHang extends javax.swing.JFrame {
             pass = false;
             JOptionPane.showMessageDialog(rootPane, "Giá không được âm!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
-        int TrangThai = Integer.parseInt(txtTrangThai.getText());
+        int TrangThai = 0;
+        try{
+            TrangThai = Integer.parseInt(txtTrangThai.getText());
+        }
+        catch(NumberFormatException ex){
+            pass = false;
+            JOptionPane.showMessageDialog(rootPane, "Trạng thái không hợp lệ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+
         if (pass){
             DonHang donhang = new DonHang(MaDon, MaKH, BienSo, DiemDi, DiemDen, NgayDi, NgayVe, Gia, TrangThai);
             BULDonHang bul = new BULDonHang();
             try{
                 bul.themDonHang(donhang);
                 JOptionPane.showMessageDialog(rootPane, String.format("Thêm thành công!"), "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                this.setVisible(false);
+                this.mainForm.updateTableDonHang();
+                this.dispose();
             }
             catch(Exception ex){
-                System.out.println(ex);
-                JOptionPane.showMessageDialog(rootPane, String.format("Đã có lỗi xảy ra! %s", ex), "Lỗi", JOptionPane.ERROR_MESSAGE);
+                if (ex.toString().contains("Duplicate entry") && ex.toString().contains(".PRIMARY")){
+                    JOptionPane.showMessageDialog(rootPane, "Mã đơn đã tồn tại!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+                }
+                else{
+                    System.out.println(ex);
+                    JOptionPane.showMessageDialog(rootPane, String.format("Đã có lỗi xảy ra! %s", ex), "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
+                
             }
-            this.setVisible(false);
-            this.mainForm.updateTableDonHang();
-            this.dispose();
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
