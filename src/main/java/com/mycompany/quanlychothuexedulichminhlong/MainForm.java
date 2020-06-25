@@ -6,6 +6,7 @@
 package com.mycompany.quanlychothuexedulichminhlong;
 import com.mycompany.BUL.*;
 import com.mycompany.DTO.*;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -944,7 +945,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void btnThemDonHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDonHangActionPerformed
         // TODO add your handling code here:
-        SuaDonHang tdhForm = new SuaDonHang(this);
+        ThemDonHang tdhForm = new ThemDonHang(this);
         tdhForm.setVisible(true);
     }//GEN-LAST:event_btnThemDonHangActionPerformed
 
@@ -969,16 +970,45 @@ public class MainForm extends javax.swing.JFrame {
     private void btnXoaDonHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaDonHangActionPerformed
         // TODO add your handling code here:     
         JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xoá đơn hàng không ?","Cảnh báo", JOptionPane.YES_NO_OPTION);
-        DefaultTableModel model = (DefaultTableModel)jTable6.getModel();
-        System.out.println(jTable6.getSelectedRow());
-        System.out.println(model.getDataVector().get(jTable6.getSelectedRow()));
+        DefaultTableModel model = (DefaultTableModel)jTable3.getModel();
+        System.out.println(jTable3.getSelectedRow());
+        Vector data = (Vector) model.getDataVector().get(jTable3.getSelectedRow());
+        DonHang dh = new DonHang((int) data.elementAt(0),
+                                 (int) data.elementAt(1),
+                                 (String) data.elementAt(2),
+                                 (String) data.elementAt(3),
+                                 (String) data.elementAt(4),
+                                 (String) data.elementAt(5),
+                                 (String) data.elementAt(6),
+                                 (long) data.elementAt(7),
+                                 (int) data.elementAt(8));
+        BULDonHang bul = new BULDonHang();
+        try{
+            bul.xoaDonHang(dh);
+            JOptionPane.showMessageDialog(rootPane, "Xoá thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        }
+        catch(SQLException ex){
+            JOptionPane.showMessageDialog(rootPane, "Đã có lỗi xảy ra!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+        }
+        this.updateTableDonHang();
     }//GEN-LAST:event_btnXoaDonHangActionPerformed
 
     private void btnSuaDonHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaDonHangActionPerformed
         // TODO add your handling code here:
-        SuaDonHang sdhForm = new SuaDonHang(this);
-        sdhForm.setVisible(true);
-                
+        int selectedRow = jTable3.getSelectedRow();
+//        jTable6.getSe
+        if (selectedRow == -1){
+            JOptionPane.showMessageDialog(rootPane, "Vui lòng lựa chọn đơn hàng cần sửa trong bảng đơn hàng!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+//            for (int i = 0; i < selectedRow.length; i++) {
+//                for (int j = 0; j < selectedColumns.length; j++) {
+//                  selectedData = (String) table.getValueAt(selectedRow[i], selectedColumns[j]);
+//                }
+//            }
+            SuaDonHang sdhForm = new SuaDonHang(this);
+            sdhForm.setVisible(true);
+        }
     }//GEN-LAST:event_btnSuaDonHangActionPerformed
 
     /**
