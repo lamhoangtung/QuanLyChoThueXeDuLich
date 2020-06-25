@@ -1001,12 +1001,7 @@ public class MainForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Vui lòng lựa chọn đơn hàng cần sửa trong bảng đơn hàng!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
         }
         else{
-//            for (int i = 0; i < selectedRow.length; i++) {
-//                for (int j = 0; j < selectedColumns.length; j++) {
-//                  selectedData = (String) table.getValueAt(selectedRow[i], selectedColumns[j]);
-//                }
-//            }
-            SuaDonHang sdhForm = new SuaDonHang(this);
+            SuaDonHang sdhForm = new SuaDonHang(this, jTable3);
             sdhForm.setVisible(true);
         }
     }//GEN-LAST:event_btnSuaDonHangActionPerformed

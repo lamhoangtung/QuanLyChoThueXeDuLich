@@ -6,11 +6,14 @@
 package com.mycompany.quanlychothuexedulichminhlong;
 import com.mycompany.BUL.*;
 import com.mycompany.DTO.*;
+import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
@@ -26,6 +29,7 @@ public class SuaDonHang extends javax.swing.JFrame {
      */
     
     MainForm mainForm = null;
+    JTable table = null;
     
     public SuaDonHang(){
         initComponents();
@@ -33,10 +37,12 @@ public class SuaDonHang extends javax.swing.JFrame {
         this.setDefaultCloseOperation(SuaDonHang.DISPOSE_ON_CLOSE );
     }
     
-    public SuaDonHang(MainForm mainForm) {
+    public SuaDonHang(MainForm mainForm, JTable table) {
         initComponents();
         loadComboBox();
         this.mainForm = mainForm;
+        this.table = table;
+        loadDataFromTable();
         this.setDefaultCloseOperation(SuaDonHang.DISPOSE_ON_CLOSE );
     }
 
@@ -60,6 +66,44 @@ public class SuaDonHang extends javax.swing.JFrame {
         }
         model = new DefaultComboBoxModel(comboBoxItems);
         cmbBienSo.setModel(model);
+    }
+    
+    private int getCmbIndexByMaKH(int id, javax.swing.JComboBox<String> cmb){
+        for (int i=0; i<cmb.getItemCount(); i++){
+            String selected_item = (String) cmb.getItemAt(i);
+            String[] selected_item_list = selected_item.split("-");
+            int extracted_id = Integer.parseInt(selected_item_list[0]);
+            if (extracted_id == id){
+                return i;
+            }
+        }
+        return -1;
+    }
+    
+    private int getCmbIndexByBienSo(String bienSo, javax.swing.JComboBox<String> cmb){
+        for (int i=0; i<cmb.getItemCount(); i++){
+            String selected_item = (String) cmb.getItemAt(i);
+            String[] selected_item_list = selected_item.split("-");
+            if (bienSo.equals(selected_item_list[1])){
+                return i;
+            }
+        }
+        return -1;
+    }
+    
+    private void loadDataFromTable(){
+        DefaultTableModel model = (DefaultTableModel)this.table.getModel();
+        System.out.println(this.table.getSelectedRow());
+        Vector data = (Vector) model.getDataVector().get(this.table.getSelectedRow());
+        txtMaDon.setText((int) data.elementAt(0) + "");
+        cmbMaKhachHang.setSelectedIndex(this.getCmbIndexByMaKH((int) data.elementAt(1), cmbMaKhachHang));
+        cmbBienSo.setSelectedIndex(this.getCmbIndexByBienSo((String) data.elementAt(2), cmbBienSo));
+        txtDiemDi.setText((String) data.elementAt(3));
+        txtDiemDen.setText((String) data.elementAt(4));
+        txtNgayDi.setText((String) data.elementAt(5));
+        txtNgayVe.setText((String) data.elementAt(6));
+        txtGia.setText((long) data.elementAt(7) + "");
+        txtTrangThai.setText((int) data.elementAt(8) + "");
     }
     
     /**
@@ -127,6 +171,7 @@ public class SuaDonHang extends javax.swing.JFrame {
             }
         });
 
+        txtMaDon.setEditable(false);
         txtMaDon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMaDonActionPerformed(evt);
@@ -292,16 +337,16 @@ public class SuaDonHang extends javax.swing.JFrame {
         String DiemDi = txtDiemDi.getText();
         String DiemDen = txtDiemDen.getText();
         
-        DateValidator validator = new DateValidatorUsingDateFormat("yyyy/MM/dd");
+        DateValidator validator = new DateValidatorUsingDateFormat("yyyy-MM-dd");
         String NgayDi = txtNgayDi.getText();
         if (validator.isValid(NgayDi) == 0){
             pass = false;
-            JOptionPane.showMessageDialog(rootPane, "Ngày đi không hợp lệ! Vui lòng nhập đúng format yyyy/MM/dd", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Ngày đi không hợp lệ! Vui lòng nhập đúng format yyyy-MM-dd", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
         String NgayVe = txtNgayVe.getText();
         if (validator.isValid(NgayVe) == 0){
             pass = false;
-            JOptionPane.showMessageDialog(rootPane, "Ngày về không hợp lệ! Vui lòng nhập đúng format yyyy/MM/dd", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Ngày về không hợp lệ! Vui lòng nhập đúng format yyyy-MM-dd", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
         long Gia = Long.parseLong(txtGia.getText());
         if (Gia < 0){
@@ -314,6 +359,7 @@ public class SuaDonHang extends javax.swing.JFrame {
             BULDonHang bul = new BULDonHang();
             try{
                 bul.suaDonHang(donhang);
+                JOptionPane.showMessageDialog(rootPane, String.format("Sửa thành công!"), "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             }
             catch(Exception ex){
                 System.out.println(ex);
