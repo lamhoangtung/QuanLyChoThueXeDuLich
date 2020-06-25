@@ -23,6 +23,10 @@ public class BULDonHang {
         return dalDonHang.layDonHangTheoMa(MaDon);
     }
     
+    public List<DonHang> layDonHangTheoDiaDiem(String DiaDiemQ){
+        return dalDonHang.layDonHangTheoDiaDiem(DiaDiemQ);
+    }
+    
     public void themDonHang(DonHang donHang) throws SQLException{
         dalDonHang.themDonHang(donHang);
     }
@@ -34,4 +38,6 @@ public class BULDonHang {
     public void xoaDonHang(DonHang donHang) throws SQLException{
         dalDonHang.xoaDonHang(donHang);
     }
+    
+    
 }

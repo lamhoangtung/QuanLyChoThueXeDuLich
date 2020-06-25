@@ -212,6 +212,11 @@ public class MainForm extends javax.swing.JFrame {
         txtTimDiaDiem.setToolTipText("Mã đơn hàng");
 
         btnTimTheoDiaDiem.setText("Tìm kiếm");
+        btnTimTheoDiaDiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimTheoDiaDiemActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Tìm kiếm theo ngày");
 
@@ -1057,6 +1062,19 @@ public class MainForm extends javax.swing.JFrame {
             updateTableDonHang();
         }
     }//GEN-LAST:event_btnTimTheoMaActionPerformed
+
+    private void btnTimTheoDiaDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimTheoDiaDiemActionPerformed
+        // TODO add your handling code here:
+        String diadiem = txtTimDiaDiem.getText().trim();
+        if (!diadiem.equals("")){
+            BULDonHang bul = new BULDonHang();
+            List<DonHang> res = bul.layDonHangTheoDiaDiem(diadiem);
+            updateTableDonHangBySearch(res);
+        }
+        else{
+            updateTableDonHang();
+        }
+    }//GEN-LAST:event_btnTimTheoDiaDiemActionPerformed
 
     /**
      * @param args the command line arguments
