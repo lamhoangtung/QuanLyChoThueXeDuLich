@@ -103,7 +103,7 @@ public class SuaDonHang extends javax.swing.JFrame {
         txtNgayDi.setText((String) data.elementAt(5));
         txtNgayVe.setText((String) data.elementAt(6));
         txtGia.setText((long) data.elementAt(7) + "");
-        txtTrangThai.setText((int) data.elementAt(8) + "");
+        cmbTrangThai.setSelectedItem((String) data.elementAt(8) + "");
     }
     
     /**
@@ -132,9 +132,9 @@ public class SuaDonHang extends javax.swing.JFrame {
         txtNgayDi = new javax.swing.JTextField();
         txtNgayVe = new javax.swing.JTextField();
         txtGia = new javax.swing.JTextField();
-        txtTrangThai = new javax.swing.JTextField();
         cmbMaKhachHang = new javax.swing.JComboBox<>();
         cmbBienSo = new javax.swing.JComboBox<>();
+        cmbTrangThai = new javax.swing.JComboBox<>();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -208,11 +208,7 @@ public class SuaDonHang extends javax.swing.JFrame {
             }
         });
 
-        txtTrangThai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTrangThaiActionPerformed(evt);
-            }
-        });
+        cmbTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đang xử lý", "Đã xác nhận", "Đã nhận xe", "Đã thanh toán", "Khác" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -245,9 +241,9 @@ public class SuaDonHang extends javax.swing.JFrame {
                             .addComponent(txtNgayDi, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
                             .addComponent(txtNgayVe, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
                             .addComponent(txtGia, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
-                            .addComponent(txtTrangThai, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
                             .addComponent(cmbBienSo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cmbMaKhachHang, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(cmbMaKhachHang, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmbTrangThai, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(206, 206, 206)
                         .addComponent(btnSua)))
@@ -297,8 +293,8 @@ public class SuaDonHang extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(txtTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                    .addComponent(cmbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addComponent(btnSua)
                 .addGap(38, 38, 38))
         );
@@ -353,14 +349,7 @@ public class SuaDonHang extends javax.swing.JFrame {
             pass = false;
             JOptionPane.showMessageDialog(rootPane, "Giá không được âm!", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
-        int TrangThai = 0;
-        try{
-            TrangThai = Integer.parseInt(txtTrangThai.getText());
-        }
-        catch(NumberFormatException ex){
-            pass = false;
-            JOptionPane.showMessageDialog(rootPane, "Trạng thái không hợp lệ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-        }
+        String TrangThai = (String) cmbTrangThai.getSelectedItem();
 
         if (pass){
             DonHang donhang = new DonHang(MaDon, MaKH, BienSo, DiemDi, DiemDen, NgayDi, NgayVe, Gia, TrangThai);
@@ -402,10 +391,6 @@ public class SuaDonHang extends javax.swing.JFrame {
     private void txtGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGiaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGiaActionPerformed
-
-    private void txtTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTrangThaiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTrangThaiActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
@@ -457,6 +442,7 @@ public class SuaDonHang extends javax.swing.JFrame {
     private javax.swing.JButton btnSua;
     private javax.swing.JComboBox<String> cmbBienSo;
     private javax.swing.JComboBox<String> cmbMaKhachHang;
+    private javax.swing.JComboBox<String> cmbTrangThai;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -473,6 +459,5 @@ public class SuaDonHang extends javax.swing.JFrame {
     private javax.swing.JTextField txtMaDon;
     private javax.swing.JTextField txtNgayDi;
     private javax.swing.JTextField txtNgayVe;
-    private javax.swing.JTextField txtTrangThai;
     // End of variables declaration//GEN-END:variables
 }

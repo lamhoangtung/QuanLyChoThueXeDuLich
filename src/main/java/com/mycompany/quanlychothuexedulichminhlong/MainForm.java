@@ -899,7 +899,7 @@ public class MainForm extends javax.swing.JFrame {
                 dh.getNgayDi(),
                 dh.getNgayVe(),
                 dh.getGia(),
-                dh.getTrangThai()
+                dh.getTrangThaiString()
             });
         }
         jTable3.setModel(tableModel);
@@ -924,7 +924,7 @@ public class MainForm extends javax.swing.JFrame {
                 dh.getNgayDi(),
                 dh.getNgayVe(),
                 dh.getGia(),
-                dh.getTrangThai()
+                dh.getTrangThaiString()
             });
             tongThu += dh.getGia();
         }
@@ -967,7 +967,7 @@ public class MainForm extends javax.swing.JFrame {
                 dh.getNgayDi(),
                 dh.getNgayVe(),
                 dh.getGia(),
-                dh.getTrangThai()
+                dh.getTrangThaiString()
             });
         }
         jTable3.setModel(tableModel);
@@ -1078,7 +1078,7 @@ public class MainForm extends javax.swing.JFrame {
                                          (String) data.elementAt(5),
                                          (String) data.elementAt(6),
                                          (long) data.elementAt(7),
-                                         (int) data.elementAt(8));
+                                         (String) data.elementAt(8));
                 BULDonHang bul = new BULDonHang();
                 try{
                     bul.xoaDonHang(dh);
