@@ -163,8 +163,8 @@ public class DALDonHang {
     }
     
     public void themDonHang(DonHang donHang) throws SQLException{
-        String query = String.format("INSERT INTO don_hang VALUES('%d', '%d', '%s', '%s', '%s', '%s', '%s', '%d', '%d')",
-                donHang.getMaDon(),
+        String query = String.format("INSERT INTO don_hang (MaKH, BienSo, DiemDi, DiemDen, NgayDi, NgayVe, Gia, TrangThai) "
+                + "VALUES('%d', '%s', '%s', '%s', '%s', '%s', '%d', '%d')",
                 donHang.getMaKH(),
                 donHang.getBienSo(),
                 donHang.getDiemDi(),
