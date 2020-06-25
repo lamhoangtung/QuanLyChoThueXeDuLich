@@ -111,7 +111,7 @@ public class DangNhap extends javax.swing.JFrame {
         else{
             if (mk.equals(pass)){
                 JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                new MainForm(currUserType).setVisible(true);
+                new MainForm(currUserType, tk).setVisible(true);
                 this.dispose();
             }
             else{
