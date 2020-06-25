@@ -28,7 +28,24 @@ public class MainForm extends javax.swing.JFrame {
     /**
      * Creates new form MainForm
      */
+    
+    String currUserType = "Master";
+    
     public MainForm() {
+        initComponents();
+        panelKhachHang.setVisible(false);
+        panelXe.setVisible(false);
+        panelThongKe.setVisible(false);
+        panelDonHang.setVisible(true);
+        updateTableDonHang();
+        updateTableKhachHang();
+        updateTableXe();
+        initTableThongKeDonHang();
+        loadComboBoxThongKe();
+    }
+    
+    public MainForm(String currUserType) {
+        this.currUserType = currUserType;
         initComponents();
         panelKhachHang.setVisible(false);
         panelXe.setVisible(false);
@@ -126,7 +143,7 @@ public class MainForm extends javax.swing.JFrame {
         cmbKhachHang = new javax.swing.JComboBox<>();
         jSeparator4 = new javax.swing.JSeparator();
         btnThongKe = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnQuanLyTaiKhoan = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quản lý cho thuê xe MINHLONG");
@@ -624,11 +641,10 @@ public class MainForm extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addGroup(panelThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(cmbKhachHang, 0, 214, Short.MAX_VALUE)
-                    .addGroup(panelThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel20)
-                        .addComponent(jLabel18)
-                        .addComponent(txtLocMaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                        .addComponent(jLabel19))
+                    .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtLocMaDon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(panelThongKeLayout.createSequentialGroup()
                             .addComponent(jLabel21)
@@ -763,10 +779,10 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Quản lý tài khoản");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnQuanLyTaiKhoan.setText("Quản lý tài khoản");
+        btnQuanLyTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnQuanLyTaiKhoanActionPerformed(evt);
             }
         });
 
@@ -807,7 +823,7 @@ public class MainForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnQuanLyTaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -847,7 +863,7 @@ public class MainForm extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(btnQuanLyTaiKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1030,11 +1046,17 @@ public class MainForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable6ComponentShown
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnQuanLyTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuanLyTaiKhoanActionPerformed
         // TODO add your handling code here:
-        QuanLyTaiKhoan qltkForm = new QuanLyTaiKhoan(this);
-        qltkForm.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if (this.currUserType.equals("Master")){
+            QuanLyTaiKhoan qltkForm = new QuanLyTaiKhoan(this);
+            qltkForm.setVisible(true);
+        }
+        else{
+            JOptionPane.showMessageDialog(rootPane, String.format("Tài khoản %s không có quyền quản lý tài khoản!", this.currUserType), "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_btnQuanLyTaiKhoanActionPerformed
 
     private void btnXoaDonHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaDonHangActionPerformed
         // TODO add your handling code here:
@@ -1268,6 +1290,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JButton btnDonHang;
     private javax.swing.JButton btnKhachHang;
     private javax.swing.JButton btnLoc;
+    private javax.swing.JButton btnQuanLyTaiKhoan;
     private javax.swing.JButton btnSuaDonHang;
     private javax.swing.JButton btnSuaKhachHang;
     private javax.swing.JButton btnSuaXe;
@@ -1285,7 +1308,6 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JButton btnXuat;
     private javax.swing.JComboBox<String> cmbBienSo;
     private javax.swing.JComboBox<String> cmbKhachHang;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;

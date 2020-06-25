@@ -94,6 +94,7 @@ public class DangNhap extends javax.swing.JFrame {
         String user = txtUser.getText();
         String pass = new String(txtMatKhau.getPassword());
         String tk=null, mk=null;
+        String currUserType = null;
         BULTaiKhoan bul = new BULTaiKhoan();        
         List<TaiKhoan> res = bul.getListTaiKhoan();
         for (int i=0; i<res.size(); i++){
@@ -101,6 +102,7 @@ public class DangNhap extends javax.swing.JFrame {
             if (t.getTenDangNhap().equals(user)){
                 tk = t.getTenDangNhap();
                 mk = t.getMatKhau();
+                currUserType = t.getLoai();
             }
         }
         if (tk == null){
@@ -109,7 +111,7 @@ public class DangNhap extends javax.swing.JFrame {
         else{
             if (mk.equals(pass)){
                 JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                new MainForm().setVisible(true);
+                new MainForm(currUserType).setVisible(true);
                 this.dispose();
             }
             else{
