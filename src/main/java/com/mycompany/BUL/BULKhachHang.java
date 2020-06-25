@@ -36,7 +36,7 @@ public class BULKhachHang {
         dalKhachHang.suaKhachHang(khachHang);
     }
         
-    public void xoaKhachHang(KhachHang khachHang){
-        dalKhachHang.xoaKhachHang(khachHang);
+    public void xoaKhachHang(int MaKHQ) throws SQLException{
+        dalKhachHang.xoaKhachHang(MaKHQ);
     }
 }

@@ -188,6 +188,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Xo&#xe1; kh&#xe1;ch h&#xe0;ng"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXoaKhachHangActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator3">
       <Properties>

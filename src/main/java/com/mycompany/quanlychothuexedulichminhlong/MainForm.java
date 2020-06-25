@@ -201,6 +201,11 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         btnXoaKhachHang.setText("Xoá khách hàng");
+        btnXoaKhachHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaKhachHangActionPerformed(evt);
+            }
+        });
 
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -1314,6 +1319,32 @@ public class MainForm extends javax.swing.JFrame {
         ThemKhachHang tkhForm = new ThemKhachHang(this);
         tkhForm.setVisible(true);
     }//GEN-LAST:event_btnThemKhachHangActionPerformed
+
+    private void btnXoaKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaKhachHangActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = jTable5.getSelectedRow();
+        if (selectedRow == -1){
+            JOptionPane.showMessageDialog(rootPane, "Vui lòng lựa chọn khách hàng cần xoá trong bảng khách hàng!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            int confimed = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xoá khách hàng không ?","Cảnh báo", JOptionPane.YES_NO_OPTION);
+            if (confimed == 0){
+                DefaultTableModel model = (DefaultTableModel)jTable5.getModel();
+                System.out.println(jTable5.getSelectedRow());
+                Vector data = (Vector) model.getDataVector().get(jTable5.getSelectedRow());
+                int MaKH = (int) data.elementAt(0);
+                BULKhachHang bul = new BULKhachHang();
+                try{
+                    bul.xoaKhachHang(MaKH);
+                    JOptionPane.showMessageDialog(rootPane, "Xoá thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                }
+                catch(SQLException ex){
+                    JOptionPane.showMessageDialog(rootPane, "Đã có lỗi xảy ra!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        this.updateTableKhachHang();
+    }//GEN-LAST:event_btnXoaKhachHangActionPerformed
 
     /**
      * @param args the command line arguments

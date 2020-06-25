@@ -119,15 +119,11 @@ public class DALKhachHang {
     }
     
     
-    public void xoaKhachHang(KhachHang khachHang){
-        try {
-            String query = String.format("DELETE FROM khach_hang where MaKH=%s", khachHang.getMaKH());
-            Connector.openConnection();
-            Statement stmt = Connector.conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            Connector.closeConnection();
-        } catch (SQLException ex) {
-            Logger.getLogger(DALKhachHang.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void xoaKhachHang(int MaKHQ) throws SQLException{
+        String query = String.format("DELETE FROM khach_hang where MaKH=%d", MaKHQ);
+        Connector.openConnection();
+        Statement stmt = Connector.conn.createStatement();
+        stmt.execute(query);
+        Connector.closeConnection();
     }
 }
