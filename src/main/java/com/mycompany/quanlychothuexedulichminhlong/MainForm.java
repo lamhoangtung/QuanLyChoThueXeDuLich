@@ -31,6 +31,7 @@ public class MainForm extends javax.swing.JFrame {
         updateTableDonHang();
         updateTableKhachHang();
         updateTableXe();
+        initTableThongKeDonHang();
     }
 
     /**
@@ -117,7 +118,7 @@ public class MainForm extends javax.swing.JFrame {
         jTable6 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jLabel24 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtTongThu = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         btnThongKe = new javax.swing.JButton();
@@ -602,7 +603,12 @@ public class MainForm extends javax.swing.JFrame {
 
         jLabel24.setText("Tổng thu:");
 
-        jTextField1.setEnabled(false);
+        txtTongThu.setEnabled(false);
+        txtTongThu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTongThuActionPerformed(evt);
+            }
+        });
 
         jLabel25.setText("VND");
 
@@ -646,7 +652,7 @@ public class MainForm extends javax.swing.JFrame {
                     .addGroup(panelThongKeLayout.createSequentialGroup()
                         .addComponent(jLabel24)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTongThu, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel25)
                         .addGap(356, 356, 356)
@@ -699,7 +705,7 @@ public class MainForm extends javax.swing.JFrame {
                                 .addGroup(panelThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jButton2)
                                     .addComponent(jLabel24)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTongThu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel25))))))
                 .addContainerGap(73, Short.MAX_VALUE))
         );
@@ -892,6 +898,33 @@ public class MainForm extends javax.swing.JFrame {
         tableModel.fireTableDataChanged();
     }
     
+    public void initTableThongKeDonHang(){
+        String []colsName = {"Mã đơn", "Mã khách hàng", "Biển số xe", "Điểm đi", "Điểm đến", "Ngày đi", "Ngày về", "Giá", "Trạng thái"};
+        DefaultTableModel tableModel = new DefaultTableModel();
+        tableModel.setColumnIdentifiers(colsName);
+        BULDonHang bul = new BULDonHang();
+        List<DonHang> res = bul.layDonHang();
+        long tongThu = 0;
+        for (int i=0; i<res.size(); i++){
+            DonHang dh = res.get(i);
+            tableModel.addRow(new Object[]{
+                dh.getMaDon(),
+                dh.getMaKH(),
+                dh.getBienSo(),
+                dh.getDiemDi(),
+                dh.getDiemDen(),
+                dh.getNgayDi(),
+                dh.getNgayVe(),
+                dh.getGia(),
+                dh.getTrangThai()
+            });
+            tongThu += dh.getGia();
+        }
+        jTable6.setModel(tableModel);
+        tableModel.fireTableDataChanged();
+        txtTongThu.setText(tongThu + "");
+    }
+    
     public void updateTableKhachHang(){
         String []colsName = {"Mã khách hàng", "Họ và tên", "Số điện thoại", "Địa chỉ", "Số lần thuê trước đó"};
         DefaultTableModel tableModel = new DefaultTableModel();
@@ -997,6 +1030,7 @@ public class MainForm extends javax.swing.JFrame {
         panelDonHang.setVisible(false);
         panelKhachHang.setVisible(false);
         panelThongKe.setVisible(true);
+        initTableThongKeDonHang();
     }//GEN-LAST:event_btnThongKeActionPerformed
 
     private void jTable6ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTable6ComponentShown
@@ -1011,27 +1045,33 @@ public class MainForm extends javax.swing.JFrame {
 
     private void btnXoaDonHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaDonHangActionPerformed
         // TODO add your handling code here:
-        int confimed = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xoá đơn hàng không ?","Cảnh báo", JOptionPane.YES_NO_OPTION);
-        if (confimed == 0){
-            DefaultTableModel model = (DefaultTableModel)jTable3.getModel();
-            System.out.println(jTable3.getSelectedRow());
-            Vector data = (Vector) model.getDataVector().get(jTable3.getSelectedRow());
-            DonHang dh = new DonHang((int) data.elementAt(0),
-                                     (int) data.elementAt(1),
-                                     (String) data.elementAt(2),
-                                     (String) data.elementAt(3),
-                                     (String) data.elementAt(4),
-                                     (String) data.elementAt(5),
-                                     (String) data.elementAt(6),
-                                     (long) data.elementAt(7),
-                                     (int) data.elementAt(8));
-            BULDonHang bul = new BULDonHang();
-            try{
-                bul.xoaDonHang(dh);
-                JOptionPane.showMessageDialog(rootPane, "Xoá thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-            }
-            catch(SQLException ex){
-                JOptionPane.showMessageDialog(rootPane, "Đã có lỗi xảy ra!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+        int selectedRow = jTable3.getSelectedRow();
+        if (selectedRow == -1){
+            JOptionPane.showMessageDialog(rootPane, "Vui lòng lựa chọn đơn hàng cần xoá trong bảng đơn hàng!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            int confimed = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xoá đơn hàng không ?","Cảnh báo", JOptionPane.YES_NO_OPTION);
+            if (confimed == 0){
+                DefaultTableModel model = (DefaultTableModel)jTable3.getModel();
+                System.out.println(jTable3.getSelectedRow());
+                Vector data = (Vector) model.getDataVector().get(jTable3.getSelectedRow());
+                DonHang dh = new DonHang((int) data.elementAt(0),
+                                         (int) data.elementAt(1),
+                                         (String) data.elementAt(2),
+                                         (String) data.elementAt(3),
+                                         (String) data.elementAt(4),
+                                         (String) data.elementAt(5),
+                                         (String) data.elementAt(6),
+                                         (long) data.elementAt(7),
+                                         (int) data.elementAt(8));
+                BULDonHang bul = new BULDonHang();
+                try{
+                    bul.xoaDonHang(dh);
+                    JOptionPane.showMessageDialog(rootPane, "Xoá thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                }
+                catch(SQLException ex){
+                    JOptionPane.showMessageDialog(rootPane, "Đã có lỗi xảy ra!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
         this.updateTableDonHang();
@@ -1102,6 +1142,10 @@ public class MainForm extends javax.swing.JFrame {
             updateTableDonHang();
         }
     }//GEN-LAST:event_btnTimTheoNgayActionPerformed
+
+    private void txtTongThuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTongThuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTongThuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1200,7 +1244,6 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
     private javax.swing.JTable jTable6;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
@@ -1219,5 +1262,6 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JTextField txtTimDiaDiem;
     private javax.swing.JTextField txtTimKiemNgay;
     private javax.swing.JTextField txtTimMa;
+    private javax.swing.JTextField txtTongThu;
     // End of variables declaration//GEN-END:variables
 }
