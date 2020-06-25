@@ -292,16 +292,16 @@ public class ThemDonHang extends javax.swing.JFrame {
         String DiemDi = txtDiemDi.getText();
         String DiemDen = txtDiemDen.getText();
         
-        DateValidator validator = new DateValidatorUsingDateFormat("yyyy/MM/dd");
+        DateValidator validator = new DateValidatorUsingDateFormat("yyyy-MM-dd");
         String NgayDi = txtNgayDi.getText();
         if (validator.isValid(NgayDi) == 0){
             pass = false;
-            JOptionPane.showMessageDialog(rootPane, "Ngày đi không hợp lệ! Vui lòng nhập đúng format yyyy/MM/dd", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Ngày đi không hợp lệ! Vui lòng nhập đúng format yyyy-MM-dd", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
         String NgayVe = txtNgayVe.getText();
         if (validator.isValid(NgayVe) == 0){
             pass = false;
-            JOptionPane.showMessageDialog(rootPane, "Ngày về không hợp lệ! Vui lòng nhập đúng format yyyy/MM/dd", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Ngày về không hợp lệ! Vui lòng nhập đúng format yyyy-MM-dd", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
         long Gia = Long.parseLong(txtGia.getText());
         if (Gia < 0){
@@ -314,6 +314,7 @@ public class ThemDonHang extends javax.swing.JFrame {
             BULDonHang bul = new BULDonHang();
             try{
                 bul.themDonHang(donhang);
+                JOptionPane.showMessageDialog(rootPane, String.format("Thêm thành công!"), "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             }
             catch(Exception ex){
                 System.out.println(ex);
