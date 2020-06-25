@@ -206,7 +206,7 @@ public class DALDonHang {
     }
     
     
-    public List<DonHang> locDonHang(String BienSoXe, String MaKhachHang, String MaDonHang, String TuNgay, String DenNgay) throws SQLException{
+    public List<DonHang> locDonHang(String BienSoXe, String MaKhachHang, String DiaDiem, String TuNgay, String DenNgay) throws SQLException{
         List<DonHang> arr = new ArrayList<DonHang>();
         String template = "SELECT * FROM don_hang WHERE (";
   
@@ -228,14 +228,15 @@ public class DALDonHang {
             template += "and MaKH = '%s' ";
         }
         
-        if (MaDonHang.trim().equals("")){
-            MaDonHang = "MaDon";
-            template += "and MaDon = %s and ";
+        String DiaDiem2 = DiaDiem;
+        if (DiaDiem.trim().equals("")){
+            DiaDiem = "DiemDi";
+            DiaDiem2 = "DiemDen";
+            template += "and (DiemDi == %s or DiemDen == %s) ";
         }
         else{
-            template += "and MaDon = '%s' and ";
+            template += "and (DiemDi like '%%%s%%' or DiemDen like '%%%s%%') and ";
         }
-        
         
         if (TuNgay.trim().equals("")){
             TuNgay = "0001/01/01";
@@ -246,7 +247,7 @@ public class DALDonHang {
         }
         
         template += "(NgayDi >= '%s' and NgayDi <= '%s' or NgayVe >= '%s' and NgayVe <= '%s'))";
-        String query = String.format(template, BienSoXe, MaKhachHang, MaDonHang, TuNgay, DenNgay, TuNgay, DenNgay);
+        String query = String.format(template, BienSoXe, MaKhachHang, DiaDiem, DiaDiem2, TuNgay, DenNgay, TuNgay, DenNgay);
         System.out.println(query);
         Connector.openConnection();
         Statement stmt = Connector.conn.createStatement();

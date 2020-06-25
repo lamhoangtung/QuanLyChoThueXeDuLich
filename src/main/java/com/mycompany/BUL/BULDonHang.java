@@ -47,7 +47,7 @@ public class BULDonHang {
         dalDonHang.xoaDonHang(donHang);
     }
     
-    public List<DonHang> locDonHang(String BienSoXe, String MaKhachHang, String MaDonHang, String TuNgay, String DenNgay) throws SQLException{
-        return dalDonHang.locDonHang(BienSoXe, MaKhachHang, MaDonHang, TuNgay, DenNgay);
+    public List<DonHang> locDonHang(String BienSoXe, String MaKhachHang, String DiaDiem, String TuNgay, String DenNgay) throws SQLException{
+        return dalDonHang.locDonHang(BienSoXe, MaKhachHang, DiaDiem, TuNgay, DenNgay);
     }
 }

@@ -896,7 +896,7 @@
                           <Component id="cmbKhachHang" alignment="1" pref="214" max="32767" attributes="0"/>
                           <Component id="jLabel20" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel18" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtLocMaDon" alignment="0" pref="206" max="32767" attributes="0"/>
+                          <Component id="txtLocDiaDiem" alignment="0" pref="206" max="32767" attributes="0"/>
                           <Component id="jLabel19" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
@@ -957,7 +957,7 @@
                               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtLocMaDon" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtLocDiaDiem" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -1013,10 +1013,10 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel18">
               <Properties>
-                <Property name="text" type="java.lang.String" value="L&#x1ecd;c theo m&#xe3; &#x111;&#x1a1;n h&#xe0;ng"/>
+                <Property name="text" type="java.lang.String" value="L&#x1ecd;c theo &#x111;&#x1ecb;a &#x111;i&#x1ec3;m"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtLocMaDon">
+            <Component class="javax.swing.JTextField" name="txtLocDiaDiem">
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value="M&#xe3; &#x111;&#x1a1;n h&#xe0;ng"/>
               </Properties>

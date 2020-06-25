@@ -122,7 +122,7 @@ public class MainForm extends javax.swing.JFrame {
         panelThongKe = new javax.swing.JPanel();
         jSeparator8 = new javax.swing.JSeparator();
         jLabel18 = new javax.swing.JLabel();
-        txtLocMaDon = new javax.swing.JTextField();
+        txtLocDiaDiem = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
@@ -567,9 +567,9 @@ public class MainForm extends javax.swing.JFrame {
 
         jSeparator8.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jLabel18.setText("Lọc theo mã đơn hàng");
+        jLabel18.setText("Lọc theo địa điểm");
 
-        txtLocMaDon.setToolTipText("Mã đơn hàng");
+        txtLocDiaDiem.setToolTipText("Mã đơn hàng");
 
         jLabel19.setText("Lọc theo mã khách hàng");
 
@@ -655,7 +655,7 @@ public class MainForm extends javax.swing.JFrame {
                     .addComponent(cmbKhachHang, 0, 214, Short.MAX_VALUE)
                     .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtLocMaDon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                    .addComponent(txtLocDiaDiem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
                     .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(panelThongKeLayout.createSequentialGroup()
@@ -705,7 +705,7 @@ public class MainForm extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel18)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtLocMaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtLocDiaDiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel19)
                         .addGap(18, 18, 18)
@@ -1254,12 +1254,12 @@ public class MainForm extends javax.swing.JFrame {
         BULDonHang bul = new BULDonHang();
         String BienSoXe = (String) cmbBienSo.getSelectedItem();
         String MaKhachHang = (String) cmbKhachHang.getSelectedItem();
-        String MaDonHang = txtLocMaDon.getText();
+        String DiaDiem = txtLocDiaDiem.getText();
         String TuNgay = txtTuNgay.getText();
         String DenNgay = txtDenNgay.getText();
         List<DonHang> res = null; 
         try {
-            res = bul.locDonHang(BienSoXe, MaKhachHang, MaDonHang, TuNgay, DenNgay);
+            res = bul.locDonHang(BienSoXe, MaKhachHang, DiaDiem, TuNgay, DenNgay);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(rootPane, String.format("Đã có lỗi xảy ra! %s", ex), "Thông báo", JOptionPane.ERROR_MESSAGE);
         }
@@ -1401,7 +1401,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JPanel panelThongKe;
     private javax.swing.JPanel panelXe;
     private javax.swing.JTextField txtDenNgay;
-    private javax.swing.JTextField txtLocMaDon;
+    private javax.swing.JTextField txtLocDiaDiem;
     private javax.swing.JTextField txtTimDiaDiem;
     private javax.swing.JTextField txtTimKiemNgay;
     private javax.swing.JTextField txtTimMa;
