@@ -7,6 +7,7 @@ package com.mycompany.BUL;
 
 import com.mycompany.DAL.DALTaiKhoan;
 import com.mycompany.DTO.TaiKhoan;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -18,5 +19,17 @@ public class BULTaiKhoan {
     
     public List<TaiKhoan> getListTaiKhoan(){
         return dalTaiKhoan.getListTaiKhoan();
+    }
+    
+    public void themTaiKhoan(TaiKhoan taiKhoan) throws SQLException{
+        dalTaiKhoan.themTaiKhoan(taiKhoan);
+    }
+    
+    public void suaTaiKhoan(TaiKhoan acc) throws SQLException{
+        dalTaiKhoan.suaTaiKhoan(acc);
+    }
+    
+    public void xoaTaiKhoan(String taiKhoan) throws SQLException{
+        dalTaiKhoan.xoaTaiKhoan(taiKhoan);
     }
 }

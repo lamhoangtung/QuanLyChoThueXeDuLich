@@ -13,13 +13,15 @@ public class TaiKhoan {
     
     String TenDangNhap;
     String MatKhau;
+    String Loai;
     
     public TaiKhoan() {
     }
 
-    public TaiKhoan(String TenDangNhap, String MatKhau) {
+    public TaiKhoan(String TenDangNhap, String MatKhau, String Loai) {
         this.TenDangNhap = TenDangNhap;
         this.MatKhau = MatKhau;
+        this.Loai = Loai;
     }
 
     public String getTenDangNhap() {
@@ -37,8 +39,14 @@ public class TaiKhoan {
     public void setMatKhau(String MatKhau) {
         this.MatKhau = MatKhau;
     }
-    
-    
+
+    public String getLoai() {
+        return Loai;
+    }
+
+    public void setLoai(String Loai) {
+        this.Loai = Loai;
+    }
     
     
 }

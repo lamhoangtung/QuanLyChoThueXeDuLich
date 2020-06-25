@@ -30,7 +30,8 @@ public class DALTaiKhoan {
             while (rs.next()){
                 String TenDangNhap = rs.getString("TenDangNhap");
                 String MatKhau = rs.getString("MatKhau");
-                TaiKhoan temp = new TaiKhoan(TenDangNhap, MatKhau);
+                String Loai = rs.getString("Loai");
+                TaiKhoan temp = new TaiKhoan(TenDangNhap, MatKhau, Loai);
                 arr.add(temp);
             }
             Connector.closeConnection();
@@ -39,6 +40,36 @@ public class DALTaiKhoan {
             Logger.getLogger(DALKhachHang.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+     
+    public void themTaiKhoan(TaiKhoan taiKhoan) throws SQLException{
+        String query = String.format("INSERT INTO tai_khoan VALUES('%s', '%s', '%s')",
+                taiKhoan.getTenDangNhap(),
+                taiKhoan.getMatKhau(),
+                taiKhoan.getLoai());
+        Connector.openConnection();
+        Statement stmt = Connector.conn.createStatement();
+        stmt.execute(query);
+        Connector.closeConnection();
+    }
+    
+    public void xoaTaiKhoan(String taiKhoan) throws SQLException{
+        String query = String.format("DELETE FROM tai_khoan where TenDangNhap='%s'", taiKhoan);
+        Connector.openConnection();
+        Statement stmt = Connector.conn.createStatement();
+        stmt.execute(query);
+        Connector.closeConnection();
+    }
+    
+    public void suaTaiKhoan(TaiKhoan acc) throws SQLException{
+        String query = String.format("UPDATE tai_khoan SET MatKhau='%s', Loai='%s' where TenDangNhap='%s'",
+                acc.getMatKhau(),
+                acc.getLoai(),
+                acc.getTenDangNhap());
+       Connector.openConnection();
+       Statement stmt = Connector.conn.createStatement();
+       stmt.execute(query);
+       Connector.closeConnection();
     }
     
 }
