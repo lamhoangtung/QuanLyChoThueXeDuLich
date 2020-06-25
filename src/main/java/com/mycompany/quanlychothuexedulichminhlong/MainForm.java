@@ -976,7 +976,8 @@ public class MainForm extends javax.swing.JFrame {
                 kh.getMaKH(),
                 kh.getHoTen(),
                 kh.getSDT(),
-                kh.getDiaChi()
+                kh.getDiaChi(),
+                kh.getSoLanDatXe()
             });
         }
         jTable5.setModel(tableModel);

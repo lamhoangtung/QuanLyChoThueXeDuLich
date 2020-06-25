@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package com.mycompany.DTO;
-
+import com.mycompany.BUL.BULDonHang;
+import com.mycompany.DTO.DonHang;
+import java.util.List;
 /**
  *
  * @author linus
@@ -56,13 +58,14 @@ public class KhachHang {
         this.DiaChi = DiaChi;
     }
 
-    public int getSoLanDatXe() {
-        return SoLanDatXe;
-    }
-
     public void setSoLanDatXe(int SoLanDatXe) {
-        this.SoLanDatXe = SoLanDatXe;
+        BULDonHang bul = new BULDonHang();
+        List<DonHang> res = bul.layDonHangTheoMaKH(this.getMaKH());
+        this.SoLanDatXe = res.size();
     }
     
-    
+    public int getSoLanDatXe(){
+        this.setSoLanDatXe(SoLanDatXe);
+        return this.SoLanDatXe;
+    }
 }

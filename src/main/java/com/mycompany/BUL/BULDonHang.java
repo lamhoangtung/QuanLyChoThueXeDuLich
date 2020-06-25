@@ -23,6 +23,10 @@ public class BULDonHang {
         return dalDonHang.layDonHangTheoMa(MaDon);
     }
     
+    public List<DonHang> layDonHangTheoMaKH(int MaKHQ){
+        return dalDonHang.layDonHangTheoMaKH(MaKHQ);
+    }
+    
     public List<DonHang> layDonHangTheoDiaDiem(String DiaDiemQ){
         return dalDonHang.layDonHangTheoDiaDiem(DiaDiemQ);
     }
