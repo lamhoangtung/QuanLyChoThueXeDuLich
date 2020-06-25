@@ -6,13 +6,18 @@
 package com.mycompany.quanlychothuexedulichminhlong;
 import com.mycompany.BUL.*;
 import com.mycompany.DTO.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -115,7 +120,7 @@ public class MainForm extends javax.swing.JFrame {
         txtDenNgay = new javax.swing.JTextField();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTable6 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        btnXuat = new javax.swing.JButton();
         jLabel24 = new javax.swing.JLabel();
         txtTongThu = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
@@ -595,7 +600,12 @@ public class MainForm extends javax.swing.JFrame {
         });
         jScrollPane6.setViewportView(jTable6);
 
-        jButton2.setText("Xuất");
+        btnXuat.setText("Xuất");
+        btnXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXuatActionPerformed(evt);
+            }
+        });
 
         jLabel24.setText("Tổng thu:");
 
@@ -646,7 +656,7 @@ public class MainForm extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel25)
                         .addGap(356, 356, 356)
-                        .addComponent(jButton2))
+                        .addComponent(btnXuat))
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 879, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(75, Short.MAX_VALUE))
         );
@@ -687,7 +697,7 @@ public class MainForm extends javax.swing.JFrame {
                                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(panelThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton2)
+                                    .addComponent(btnXuat)
                                     .addComponent(jLabel24)
                                     .addComponent(txtTongThu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel25))))))
@@ -1199,6 +1209,27 @@ public class MainForm extends javax.swing.JFrame {
         updateTableThongKeDonHangFromFilter(res);
     }//GEN-LAST:event_btnLocActionPerformed
 
+    private void btnXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatActionPerformed
+        // TODO add your handling code here:
+        fileChooser.setDialogTitle("Xuất ra excel ...");
+        FileNameExtensionFilter fnef = new FileNameExtensionFilter("Excel files (*.xlsx)", "xlsx");
+        fileChooser.setFileFilter(fnef);
+        int returnVal = fileChooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            String path = fileChooser.getSelectedFile().toString().trim();
+            if (!path.endsWith(".xlsx")){
+                path += ".xlsx";
+            }
+            System.out.println(path);
+            try {
+                ExcelExporter.process(jTable6, path);
+                JOptionPane.showMessageDialog(rootPane, "Xuất báo cáo thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(rootPane, String.format("Đã có lỗi xảy ra! %s", ex), "Thông báo", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnXuatActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1234,6 +1265,7 @@ public class MainForm extends javax.swing.JFrame {
         });
     }
 
+    private JFileChooser fileChooser = new JFileChooser();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDonHang;
     private javax.swing.JButton btnKhachHang;
@@ -1252,6 +1284,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JButton btnXoaDonHang;
     private javax.swing.JButton btnXoaKhachHang;
     private javax.swing.JButton btnXoaXe;
+    private javax.swing.JButton btnXuat;
     private javax.swing.JComboBox<String> cmbBienSo;
     private javax.swing.JComboBox<String> cmbKhachHang;
     private javax.swing.JButton jButton1;
@@ -1261,7 +1294,6 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
