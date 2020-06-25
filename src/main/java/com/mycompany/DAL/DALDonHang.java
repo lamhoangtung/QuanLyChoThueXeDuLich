@@ -232,7 +232,7 @@ public class DALDonHang {
         if (DiaDiem.trim().equals("")){
             DiaDiem = "DiemDi";
             DiaDiem2 = "DiemDen";
-            template += "and (DiemDi == %s or DiemDen == %s) ";
+            template += "and (DiemDi = %s or DiemDen = %s) and ";
         }
         else{
             template += "and (DiemDi like '%%%s%%' or DiemDen like '%%%s%%') and ";
