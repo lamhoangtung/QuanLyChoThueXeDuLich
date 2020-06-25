@@ -904,6 +904,14 @@ public class MainForm extends javax.swing.JFrame {
 
     private void btnSuaKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaKhachHangActionPerformed
         // TODO add your handling code here:
+        int selectedRow = jTable5.getSelectedRow();
+        if (selectedRow == -1){
+            JOptionPane.showMessageDialog(rootPane, "Vui lòng lựa chọn khách hàng cần sửa trong bảng khách hàng!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            SuaKhachHang skhForm = new SuaKhachHang(this, jTable5);
+            skhForm.setVisible(true);
+        }
     }//GEN-LAST:event_btnSuaKhachHangActionPerformed
 
     private void btnSuaXeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaXeActionPerformed

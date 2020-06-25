@@ -6,11 +6,14 @@
 package com.mycompany.quanlychothuexedulichminhlong;
 import com.mycompany.BUL.*;
 import com.mycompany.DTO.*;
+import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
@@ -19,24 +22,39 @@ import org.jdatepicker.impl.UtilDateModel;
  *
  * @author linus
  */
-public class ThemKhachHang extends javax.swing.JFrame {
+public class SuaKhachHang extends javax.swing.JFrame {
 
     /**
      * Creates new form ThemDonHangg
      */
     
     MainForm mainForm = null;
+    JTable table = null;
     
-    public ThemKhachHang(){
+    public SuaKhachHang(){
         initComponents();
-        this.setDefaultCloseOperation(ThemKhachHang.DISPOSE_ON_CLOSE );
+        this.setDefaultCloseOperation(SuaKhachHang.DISPOSE_ON_CLOSE );
     }
     
-    public ThemKhachHang(MainForm mainForm) {
+    public SuaKhachHang(MainForm mainForm, JTable table) {
         initComponents();
         this.mainForm = mainForm;
-        this.setDefaultCloseOperation(ThemKhachHang.DISPOSE_ON_CLOSE );
+        this.table = table;
+        loadDataFromTable();
+        this.setDefaultCloseOperation(SuaKhachHang.DISPOSE_ON_CLOSE );
     }
+
+
+    private void loadDataFromTable(){
+        DefaultTableModel model = (DefaultTableModel)this.table.getModel();
+        System.out.println(this.table.getSelectedRow());
+        Vector data = (Vector) model.getDataVector().get(this.table.getSelectedRow());
+        txtMaKH.setText((int) data.elementAt(0) + "");
+        txtHoTen.setText((String) data.elementAt(1));
+        txtSDT.setText((long) data.elementAt(2) + "");
+        txtDiaChi.setText((String) data.elementAt(3));
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,34 +65,45 @@ public class ThemKhachHang extends javax.swing.JFrame {
     private void initComponents() {
 
         jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        btnThem = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        btnSua = new javax.swing.JButton();
+        txtMaKH = new javax.swing.JTextField();
         txtHoTen = new javax.swing.JTextField();
-        txtSoDienThoai = new javax.swing.JTextField();
+        txtSDT = new javax.swing.JTextField();
         txtDiaChi = new javax.swing.JTextField();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Thêm khách hàng");
+        setTitle("Sửa khách hàng");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
 
-        jLabel4.setText("Họ và tên");
+        jLabel1.setText("Mã khách hàng");
 
-        jLabel5.setText("Địa chỉ");
+        jLabel4.setText("Họ và tên");
 
         jLabel6.setText("Số điện thoại");
 
-        btnThem.setText("Thêm");
-        btnThem.addActionListener(new java.awt.event.ActionListener() {
+        jLabel8.setText("Địa chỉ");
+
+        btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemActionPerformed(evt);
+                btnSuaActionPerformed(evt);
+            }
+        });
+
+        txtMaKH.setEditable(false);
+        txtMaKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMaKHActionPerformed(evt);
             }
         });
 
@@ -84,9 +113,9 @@ public class ThemKhachHang extends javax.swing.JFrame {
             }
         });
 
-        txtSoDienThoai.addActionListener(new java.awt.event.ActionListener() {
+        txtSDT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSoDienThoaiActionPerformed(evt);
+                txtSDTActionPerformed(evt);
             }
         });
 
@@ -103,45 +132,56 @@ public class ThemKhachHang extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6))
-                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel8)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(90, 90, 90)
+                                        .addComponent(jLabel4))
+                                    .addComponent(jLabel6))
+                                .addGap(40, 40, 40))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(31, 31, 31)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtHoTen, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
-                            .addComponent(txtSoDienThoai, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
+                            .addComponent(txtMaKH, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
+                            .addComponent(txtSDT, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
                             .addComponent(txtDiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(206, 206, 206)
-                        .addComponent(btnThem)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                        .addComponent(btnSua)))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(txtSoDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel8)
+                    .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(btnThem)
-                .addGap(24, 24, 24))
+                .addComponent(btnSua)
+                .addGap(38, 38, 38))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
         boolean pass = true;
         
@@ -155,7 +195,7 @@ public class ThemKhachHang extends javax.swing.JFrame {
         
         long SoDienThoai = 0;
         try{
-            SoDienThoai = Long.parseLong(txtSoDienThoai.getText());
+            SoDienThoai = Long.parseLong(txtSDT.getText());
         }
         catch(Exception ex){
             pass = false;
@@ -170,11 +210,11 @@ public class ThemKhachHang extends javax.swing.JFrame {
         }
         
         if (pass){
-            KhachHang kh = new KhachHang(0, HoTen, SoDienThoai, DiaChi, 0);
+            KhachHang kh = new KhachHang(Integer.parseInt(txtMaKH.getText()), HoTen, SoDienThoai, DiaChi, 0);
             BULKhachHang bul = new BULKhachHang();
             try{
-                bul.themKhachHang(kh);
-                JOptionPane.showMessageDialog(rootPane, String.format("Thêm thành công!"), "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                bul.suaKhachHang(kh);
+                JOptionPane.showMessageDialog(rootPane, String.format("Sửa thành công!"), "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 this.setVisible(false);
                 this.mainForm.updateTableKhachHang();
                 this.dispose();
@@ -190,19 +230,15 @@ public class ThemKhachHang extends javax.swing.JFrame {
                 
             }
         }
-    }//GEN-LAST:event_btnThemActionPerformed
+    }//GEN-LAST:event_btnSuaActionPerformed
 
     private void txtHoTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHoTenActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtHoTenActionPerformed
 
-    private void txtSoDienThoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSoDienThoaiActionPerformed
+    private void txtSDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSDTActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtSoDienThoaiActionPerformed
-
-    private void txtDiaChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiaChiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDiaChiActionPerformed
+    }//GEN-LAST:event_txtSDTActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
@@ -211,6 +247,14 @@ public class ThemKhachHang extends javax.swing.JFrame {
         this.mainForm.updateTableDonHang();
         this.dispose();
     }//GEN-LAST:event_formWindowClosing
+
+    private void txtMaKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaKHActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMaKHActionPerformed
+
+    private void txtDiaChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiaChiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDiaChiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,22 +273,14 @@ public class ThemKhachHang extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ThemKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ThemKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ThemKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ThemKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -257,19 +293,21 @@ public class ThemKhachHang extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ThemKhachHang().setVisible(true);
+                new SuaKhachHang().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnSua;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtHoTen;
-    private javax.swing.JTextField txtSoDienThoai;
+    private javax.swing.JTextField txtMaKH;
+    private javax.swing.JTextField txtSDT;
     // End of variables declaration//GEN-END:variables
 }

@@ -32,7 +32,7 @@ public class BULKhachHang {
         dalKhachHang.themKhachHang(khachHang);
     }
     
-    public void suaKhachHang(KhachHang khachHang){
+    public void suaKhachHang(KhachHang khachHang) throws SQLException{
         dalKhachHang.suaKhachHang(khachHang);
     }
         

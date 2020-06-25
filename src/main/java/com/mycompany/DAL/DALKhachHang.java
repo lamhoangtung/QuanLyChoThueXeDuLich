@@ -104,21 +104,18 @@ public class DALKhachHang {
     }
     
     
-    public void suaKhachHang(KhachHang khachHang){
-        try {
-            String query = String.format("UPDATE khach_hang SET HoTen=%s, SDT=%d, DiaChi=%s, SoLanDatXe=%d where MaKH=%s",
-                    khachHang.getHoTen(),
-                    khachHang.getSDT(),
-                    khachHang.getDiaChi(),
-                    khachHang.getSoLanDatXe(),
-                    khachHang.getMaKH());
-            Connector.openConnection();
-            Statement stmt = Connector.conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            Connector.closeConnection();
-        } catch (SQLException ex) {
-            Logger.getLogger(DALKhachHang.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void suaKhachHang(KhachHang khachHang) throws SQLException{
+        String query = String.format("UPDATE khach_hang SET HoTen='%s', SDT=%d, DiaChi='%s', SoLanDatXe=%d where MaKH=%d",
+                khachHang.getHoTen(),
+                khachHang.getSDT(),
+                khachHang.getDiaChi(),
+                khachHang.getSoLanDatXe(),
+                khachHang.getMaKH());
+        System.out.println(query);
+        Connector.openConnection();
+        Statement stmt = Connector.conn.createStatement();
+        stmt.execute(query);
+        Connector.closeConnection();
     }
     
     
