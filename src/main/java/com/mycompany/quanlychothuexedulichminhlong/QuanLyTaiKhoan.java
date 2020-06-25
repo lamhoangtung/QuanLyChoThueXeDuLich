@@ -56,6 +56,22 @@ public class QuanLyTaiKhoan extends javax.swing.JFrame {
         jTable1.setModel(tableModel);
         tableModel.fireTableDataChanged();
     }
+    
+    private void updateTableTaiKhoanFromSearch(List<TaiKhoan> res){
+        String []colsName = {"Tài khoản", "Mật khẩu", "Loại"};
+        DefaultTableModel tableModel = new DefaultTableModel();
+        tableModel.setColumnIdentifiers(colsName);
+        for (int i=0; i<res.size(); i++){
+            TaiKhoan tk = res.get(i);
+            tableModel.addRow(new Object[]{
+                tk.getTenDangNhap(),
+                tk.getMatKhau(),
+                tk.getLoai(),
+            });
+        }
+        jTable1.setModel(tableModel);
+        tableModel.fireTableDataChanged();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -140,6 +156,11 @@ public class QuanLyTaiKhoan extends javax.swing.JFrame {
         });
 
         btnTimKiem.setText("Tìm kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -320,6 +341,21 @@ public class QuanLyTaiKhoan extends javax.swing.JFrame {
         }
         updateTableTaiKhoan();
     }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+        // TODO add your handling code here:
+        boolean passed = true;
+        String tk = txtTaiKhoan.getText();
+        if (tk.equals("")){
+            passed = false;
+            updateTableTaiKhoan();
+        }
+        if (passed){
+            BULTaiKhoan bul = new BULTaiKhoan();
+            List <TaiKhoan> res = bul.timTaiKhoan(tk);
+            updateTableTaiKhoanFromSearch(res);
+        }
+    }//GEN-LAST:event_btnTimKiemActionPerformed
 
     /**
      * @param args the command line arguments

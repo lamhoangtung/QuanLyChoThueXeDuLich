@@ -32,4 +32,8 @@ public class BULTaiKhoan {
     public void xoaTaiKhoan(String taiKhoan) throws SQLException{
         dalTaiKhoan.xoaTaiKhoan(taiKhoan);
     }
+    
+    public List<TaiKhoan> timTaiKhoan(String TenDangNhapQ){
+        return dalTaiKhoan.timTaiKhoan(TenDangNhapQ);
+    }
 }

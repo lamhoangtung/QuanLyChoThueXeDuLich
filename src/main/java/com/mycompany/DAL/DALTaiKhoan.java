@@ -20,10 +20,32 @@ import java.util.logging.Logger;
  */
 public class DALTaiKhoan {
     
-     public List<TaiKhoan> getListTaiKhoan(){
+    public List<TaiKhoan> getListTaiKhoan(){
         try {
             List<TaiKhoan> arr = new ArrayList<TaiKhoan>();
             String query = "SELECT * FROM tai_khoan";
+            Connector.openConnection();
+            Statement stmt = Connector.conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()){
+                String TenDangNhap = rs.getString("TenDangNhap");
+                String MatKhau = rs.getString("MatKhau");
+                String Loai = rs.getString("Loai");
+                TaiKhoan temp = new TaiKhoan(TenDangNhap, MatKhau, Loai);
+                arr.add(temp);
+            }
+            Connector.closeConnection();
+            return arr;
+        } catch (SQLException ex) {
+            Logger.getLogger(DALKhachHang.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+     
+    public List<TaiKhoan> timTaiKhoan(String TenDangNhapQ){
+        try {
+            List<TaiKhoan> arr = new ArrayList<TaiKhoan>();
+            String query = String.format("SELECT * FROM tai_khoan WHERE TenDangNhap LIKE '%%%s%%'", TenDangNhapQ);
             Connector.openConnection();
             Statement stmt = Connector.conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
