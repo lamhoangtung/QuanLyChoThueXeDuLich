@@ -6,7 +6,11 @@
 
 package com.mycompany.quanlychothuexedulichminhlong;
 
+import static java.util.Collections.list;
 import javax.swing.JOptionPane;
+import com.mycompany.DTO.TaiKhoan;
+import com.mycompany.BUL.BULTaiKhoan;
+import java.util.List;
 
 /**
  *
@@ -90,8 +94,10 @@ public class DangNhap extends javax.swing.JFrame {
         String user = txtUser.getText();
         String pass = new String(txtMatKhau.getPassword());
         String tk=null, mk=null;
-        list = TaiKhoanBLL.getInstance().getlisttaikhoan();
-        for (taikhoan t : list){
+        BULTaiKhoan bul = new BULTaiKhoan();        
+        List<TaiKhoan> res = bul.getListTaiKhoan();
+        for (int i=0; i<res.size(); i++){
+            TaiKhoan t = res.get(i);
             if (t.getTenDangNhap().equals(user)){
                 tk = t.getTenDangNhap();
                 mk = t.getMatKhau();
