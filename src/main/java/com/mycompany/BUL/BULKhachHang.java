@@ -6,6 +6,7 @@
 package com.mycompany.BUL;
 import com.mycompany.DAL.DALKhachHang;
 import com.mycompany.DTO.KhachHang;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -27,7 +28,7 @@ public class BULKhachHang {
         return dalKhachHang.layKhachHangTheoTen(HoTen);
     }
     
-    public void themKhachHang(KhachHang khachHang){
+    public void themKhachHang(KhachHang khachHang) throws SQLException{
         dalKhachHang.themKhachHang(khachHang);
     }
     

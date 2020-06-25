@@ -91,21 +91,16 @@ public class DALKhachHang {
         return null;
     }
     
-    public void themKhachHang(KhachHang khachHang){
-        try {
-            String query = String.format("INSERT INTO khach_hang VALUES('%d', '%s', '%d', '%s', '%d')",
-                    khachHang.getMaKH(),
-                    khachHang.getHoTen(),
-                    khachHang.getSDT(),
-                    khachHang.getDiaChi(),
-                    khachHang.getSoLanDatXe());
-            Connector.openConnection();
-            Statement stmt = Connector.conn.createStatement();
-            stmt.execute(query);
-            Connector.closeConnection();
-        } catch (SQLException ex) {
-            Logger.getLogger(DALKhachHang.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void themKhachHang(KhachHang khachHang) throws SQLException{
+        String query = String.format("INSERT INTO khach_hang (HoTen, SDT, DiaChi, SoLanDatXe) VALUES('%s', '%d', '%s', '%d')",
+                khachHang.getHoTen(),
+                khachHang.getSDT(),
+                khachHang.getDiaChi(),
+                khachHang.getSoLanDatXe());
+        Connector.openConnection();
+        Statement stmt = Connector.conn.createStatement();
+        stmt.execute(query);
+        Connector.closeConnection();
     }
     
     

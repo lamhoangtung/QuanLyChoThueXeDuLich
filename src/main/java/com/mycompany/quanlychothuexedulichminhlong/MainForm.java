@@ -187,6 +187,11 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         btnThemKhachHang.setText("Thêm khách hàng");
+        btnThemKhachHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemKhachHangActionPerformed(evt);
+            }
+        });
 
         btnSuaKhachHang.setText("Sửa khách hàng");
         btnSuaKhachHang.addActionListener(new java.awt.event.ActionListener() {
@@ -1295,6 +1300,12 @@ public class MainForm extends javax.swing.JFrame {
     private void txtTongNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTongNoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTongNoActionPerformed
+
+    private void btnThemKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemKhachHangActionPerformed
+        // TODO add your handling code here:
+        ThemKhachHang tkhForm = new ThemKhachHang(this);
+        tkhForm.setVisible(true);
+    }//GEN-LAST:event_btnThemKhachHangActionPerformed
 
     /**
      * @param args the command line arguments
