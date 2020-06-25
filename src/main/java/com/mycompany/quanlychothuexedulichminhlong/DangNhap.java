@@ -104,16 +104,16 @@ public class DangNhap extends javax.swing.JFrame {
             }
         }
         if (tk == null){
-            JOptionPane.showMessageDialog(rootPane, "Tài khoản không tồn tại");
+            JOptionPane.showMessageDialog(rootPane, "Tài khoản không tồn tại", "Thông báo", JOptionPane.ERROR_MESSAGE);
         }
         else{
             if (mk.equals(pass)){
-                JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công");
+                JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 new MainForm().setVisible(true);
                 this.dispose();
             }
             else{
-                JOptionPane.showMessageDialog(rootPane, "Sai mật khẩu !");
+                JOptionPane.showMessageDialog(rootPane, "Sai mật khẩu !", "Thông báo", JOptionPane.ERROR_MESSAGE);
             }
         }
                 
