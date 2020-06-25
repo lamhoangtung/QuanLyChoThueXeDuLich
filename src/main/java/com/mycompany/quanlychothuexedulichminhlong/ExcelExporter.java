@@ -24,7 +24,7 @@ public class ExcelExporter {
     public ExcelExporter() {
     }
     
-    public static void process(JTable table, String path, String TongThu) throws FileNotFoundException, IOException {
+    public static void process(JTable table, String path, String TongThu, String TongNo) throws FileNotFoundException, IOException {
         XSSFWorkbook wb = new XSSFWorkbook();
         Sheet sheet = wb.createSheet(); //WorkSheet
         Row row = sheet.createRow(2); //Row created at line 3
@@ -48,6 +48,12 @@ public class ExcelExporter {
         row.createCell(0).setCellValue("Tổng thu");
         row.createCell(1).setCellValue(TongThu);
         row.createCell(2).setCellValue("VND");
+        
+        row = sheet.createRow((model.getRowCount() + 4));
+        row.createCell(0).setCellValue("Tổng nợ");
+        row.createCell(1).setCellValue(TongNo);
+        row.createCell(2).setCellValue("VND");
+        
         wb.write(new FileOutputStream(path));//Save the file     
     }    
     

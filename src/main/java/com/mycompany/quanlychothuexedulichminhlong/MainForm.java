@@ -13,10 +13,8 @@ import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 
 /**
@@ -141,6 +139,9 @@ public class MainForm extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
         cmbBienSo = new javax.swing.JComboBox<>();
         cmbKhachHang = new javax.swing.JComboBox<>();
+        jLabel26 = new javax.swing.JLabel();
+        txtTongNo = new javax.swing.JTextField();
+        jLabel27 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         btnThongKe = new javax.swing.JButton();
         btnQuanLyTaiKhoan = new javax.swing.JButton();
@@ -633,6 +634,17 @@ public class MainForm extends javax.swing.JFrame {
 
         jLabel25.setText("VND");
 
+        jLabel26.setText("Tổng nợ:");
+
+        txtTongNo.setEnabled(false);
+        txtTongNo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTongNoActionPerformed(evt);
+            }
+        });
+
+        jLabel27.setText("VND");
+
         javax.swing.GroupLayout panelThongKeLayout = new javax.swing.GroupLayout(panelThongKe);
         panelThongKe.setLayout(panelThongKeLayout);
         panelThongKeLayout.setHorizontalGroup(
@@ -663,15 +675,22 @@ public class MainForm extends javax.swing.JFrame {
                 .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(panelThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panelThongKeLayout.createSequentialGroup()
-                        .addComponent(jLabel24)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtTongThu, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel25)
-                        .addGap(356, 356, 356)
-                        .addComponent(btnXuat))
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 879, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 879, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelThongKeLayout.createSequentialGroup()
+                            .addComponent(jLabel26)
+                            .addGap(24, 24, 24)
+                            .addComponent(txtTongNo, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel27))
+                        .addGroup(panelThongKeLayout.createSequentialGroup()
+                            .addComponent(jLabel24)
+                            .addGap(18, 18, 18)
+                            .addComponent(txtTongThu, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel25)
+                            .addGap(356, 356, 356)
+                            .addComponent(btnXuat))))
                 .addContainerGap(75, Short.MAX_VALUE))
         );
         panelThongKeLayout.setVerticalGroup(
@@ -714,8 +733,13 @@ public class MainForm extends javax.swing.JFrame {
                                     .addComponent(btnXuat)
                                     .addComponent(jLabel24)
                                     .addComponent(txtTongThu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel25))))))
-                .addContainerGap(73, Short.MAX_VALUE))
+                                    .addComponent(jLabel25))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panelThongKeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel26)
+                                    .addComponent(txtTongNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel27))))))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         jLayeredPane1.setLayer(panelDonHang, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -912,7 +936,7 @@ public class MainForm extends javax.swing.JFrame {
         tableModel.setColumnIdentifiers(colsName);
         BULDonHang bul = new BULDonHang();
         List<DonHang> res = bul.layDonHang();
-        long tongThu = 0;
+        long tongThu = 0, tongNo = 0;
         for (int i=0; i<res.size(); i++){
             DonHang dh = res.get(i);
             tableModel.addRow(new Object[]{
@@ -926,11 +950,18 @@ public class MainForm extends javax.swing.JFrame {
                 dh.getGia(),
                 dh.getTrangThaiString()
             });
-            tongThu += dh.getGia();
+            if (dh.getTrangThai() == 3){
+                tongThu += dh.getGia();
+            }
+            else{
+                tongNo += dh.getGia();
+            }
+            
         }
         jTable6.setModel(tableModel);
         tableModel.fireTableDataChanged();
         txtTongThu.setText(tongThu + "");
+        txtTongNo.setText(tongNo + "");
     }
     
     public void updateTableKhachHang(){
@@ -973,7 +1004,6 @@ public class MainForm extends javax.swing.JFrame {
         jTable3.setModel(tableModel);
         tableModel.fireTableDataChanged();
     }
-    
     
     public void updateTableXe(){
         String []colsName = {"Biển số", "Loại xe", "Số chỗ", "Trạng thái"};
@@ -1186,11 +1216,11 @@ public class MainForm extends javax.swing.JFrame {
         cmbBienSo.setModel(model);
     }
     
-     public void updateTableThongKeDonHangFromFilter(List<DonHang> res){
+    public void updateTableThongKeDonHangFromFilter(List<DonHang> res){
         String []colsName = {"Mã đơn", "Mã khách hàng", "Biển số xe", "Điểm đi", "Điểm đến", "Ngày đi", "Ngày về", "Giá", "Trạng thái"};
         DefaultTableModel tableModel = new DefaultTableModel();
         tableModel.setColumnIdentifiers(colsName);
-        long tongThu = 0;
+        long tongThu = 0, tongNo = 0;
         for (int i=0; i<res.size(); i++){
             DonHang dh = res.get(i);
             tableModel.addRow(new Object[]{
@@ -1202,13 +1232,19 @@ public class MainForm extends javax.swing.JFrame {
                 dh.getNgayDi(),
                 dh.getNgayVe(),
                 dh.getGia(),
-                dh.getTrangThai()
+                dh.getTrangThaiString()
             });
-            tongThu += dh.getGia();
+            if (dh.getTrangThai() == 3){
+                tongThu += dh.getGia();
+            }
+            else{
+                tongNo += dh.getGia();
+            }
         }
         jTable6.setModel(tableModel);
         tableModel.fireTableDataChanged();
         txtTongThu.setText(tongThu + "");
+        txtTongNo.setText(tongNo + "");
     }
     
     
@@ -1242,13 +1278,17 @@ public class MainForm extends javax.swing.JFrame {
             }
             System.out.println(path);
             try {
-                ExcelExporter.process(jTable6, path, txtTongThu.getText());
+                ExcelExporter.process(jTable6, path, txtTongThu.getText(), txtTongNo.getText());
                 JOptionPane.showMessageDialog(rootPane, "Xuất báo cáo thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(rootPane, String.format("Đã có lỗi xảy ra! %s", ex), "Thông báo", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_btnXuatActionPerformed
+
+    private void txtTongNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTongNoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTongNoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1328,6 +1368,8 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -1362,6 +1404,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JTextField txtTimDiaDiem;
     private javax.swing.JTextField txtTimKiemNgay;
     private javax.swing.JTextField txtTimMa;
+    private javax.swing.JTextField txtTongNo;
     private javax.swing.JTextField txtTongThu;
     private javax.swing.JTextField txtTuNgay;
     // End of variables declaration//GEN-END:variables
