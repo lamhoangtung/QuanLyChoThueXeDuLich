@@ -221,8 +221,18 @@ public class MainForm extends javax.swing.JFrame {
         jLabel9.setText("Tìm kiếm theo ngày");
 
         txtTimKiemNgay.setToolTipText("Mã đơn hàng");
+        txtTimKiemNgay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimKiemNgayActionPerformed(evt);
+            }
+        });
 
         btnTimTheoNgay.setText("Tìm kiếm");
+        btnTimTheoNgay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimTheoNgayActionPerformed(evt);
+            }
+        });
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1075,6 +1085,23 @@ public class MainForm extends javax.swing.JFrame {
             updateTableDonHang();
         }
     }//GEN-LAST:event_btnTimTheoDiaDiemActionPerformed
+
+    private void txtTimKiemNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemNgayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTimKiemNgayActionPerformed
+
+    private void btnTimTheoNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimTheoNgayActionPerformed
+        // TODO add your handling code here:
+        String ngay = txtTimKiemNgay.getText().trim();
+        if (!ngay.equals("")){
+            BULDonHang bul = new BULDonHang();
+            List<DonHang> res = bul.layDonHangTheoNgay(ngay);
+            updateTableDonHangBySearch(res);
+        }
+        else{
+            updateTableDonHang();
+        }
+    }//GEN-LAST:event_btnTimTheoNgayActionPerformed
 
     /**
      * @param args the command line arguments
