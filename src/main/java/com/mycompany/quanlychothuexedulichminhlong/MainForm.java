@@ -60,14 +60,14 @@ public class MainForm extends javax.swing.JFrame {
         panelDonHang = new javax.swing.JPanel();
         jSeparator5 = new javax.swing.JSeparator();
         jLabel7 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jButton7 = new javax.swing.JButton();
+        txtTimMa = new javax.swing.JTextField();
+        btnTimTheoMa = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jButton8 = new javax.swing.JButton();
+        txtTimDiaDiem = new javax.swing.JTextField();
+        btnTimTheoDiaDiem = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
-        jButton9 = new javax.swing.JButton();
+        txtTimKiemNgay = new javax.swing.JTextField();
+        btnTimTheoNgay = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
         panelXe = new javax.swing.JPanel();
@@ -198,21 +198,26 @@ public class MainForm extends javax.swing.JFrame {
 
         jLabel7.setText("Tìm kiếm theo mã");
 
-        jTextField7.setToolTipText("Mã đơn hàng");
+        txtTimMa.setToolTipText("Mã đơn hàng");
 
-        jButton7.setText("Tìm kiếm");
+        btnTimTheoMa.setText("Tìm kiếm");
+        btnTimTheoMa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimTheoMaActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("Tìm kiếm theo địa điểm");
 
-        jTextField8.setToolTipText("Mã đơn hàng");
+        txtTimDiaDiem.setToolTipText("Mã đơn hàng");
 
-        jButton8.setText("Tìm kiếm");
+        btnTimTheoDiaDiem.setText("Tìm kiếm");
 
         jLabel9.setText("Tìm kiếm theo ngày");
 
-        jTextField9.setToolTipText("Mã đơn hàng");
+        txtTimKiemNgay.setToolTipText("Mã đơn hàng");
 
-        jButton9.setText("Tìm kiếm");
+        btnTimTheoNgay.setText("Tìm kiếm");
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -248,19 +253,19 @@ public class MainForm extends javax.swing.JFrame {
                         .addGap(28, 28, 28)
                         .addGroup(panelDonHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtTimMa, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDonHangLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(panelDonHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton7, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnTimTheoMa, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDonHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel8)
-                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton8, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addComponent(txtTimDiaDiem, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnTimTheoDiaDiem, javax.swing.GroupLayout.Alignment.TRAILING))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDonHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel9)
-                                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton9, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                                .addComponent(txtTimKiemNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnTimTheoNgay, javax.swing.GroupLayout.Alignment.TRAILING)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -277,21 +282,21 @@ public class MainForm extends javax.swing.JFrame {
                                 .addGap(95, 95, 95)
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtTimMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton7)
+                                .addComponent(btnTimTheoMa)
                                 .addGap(33, 33, 33)
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtTimDiaDiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton8)
+                                .addComponent(btnTimTheoDiaDiem)
                                 .addGap(28, 28, 28)
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtTimKiemNgay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton9))
+                                .addComponent(btnTimTheoNgay))
                             .addGroup(panelDonHangLayout.createSequentialGroup()
                                 .addGap(42, 42, 42)
                                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 596, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -871,7 +876,7 @@ public class MainForm extends javax.swing.JFrame {
         jTable3.setModel(tableModel);
         tableModel.fireTableDataChanged();
     }
-
+    
     public void updateTableKhachHang(){
         String []colsName = {"Mã khách hàng", "Họ và tên", "Số điện thoại", "Địa chỉ", "Số lần thuê trước đó"};
         DefaultTableModel tableModel = new DefaultTableModel();
@@ -888,6 +893,28 @@ public class MainForm extends javax.swing.JFrame {
             });
         }
         jTable5.setModel(tableModel);
+        tableModel.fireTableDataChanged();
+    }
+
+    public void updateTableDonHangBySearch(List<DonHang> res){
+        String []colsName = {"Mã đơn", "Mã khách hàng", "Biển số xe", "Điểm đi", "Điểm đến", "Ngày đi", "Ngày về", "Giá", "Trạng thái"};
+        DefaultTableModel tableModel = new DefaultTableModel();
+        tableModel.setColumnIdentifiers(colsName);
+        for (int i=0; i<res.size(); i++){
+            DonHang dh = res.get(i);
+            tableModel.addRow(new Object[]{
+                dh.getMaDon(),
+                dh.getMaKH(),
+                dh.getBienSo(),
+                dh.getDiemDi(),
+                dh.getDiemDen(),
+                dh.getNgayDi(),
+                dh.getNgayVe(),
+                dh.getGia(),
+                dh.getTrangThai()
+            });
+        }
+        jTable3.setModel(tableModel);
         tableModel.fireTableDataChanged();
     }
     
@@ -998,7 +1025,6 @@ public class MainForm extends javax.swing.JFrame {
     private void btnSuaDonHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaDonHangActionPerformed
         // TODO add your handling code here:
         int selectedRow = jTable3.getSelectedRow();
-//        jTable6.getSe
         if (selectedRow == -1){
             JOptionPane.showMessageDialog(rootPane, "Vui lòng lựa chọn đơn hàng cần sửa trong bảng đơn hàng!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -1007,6 +1033,30 @@ public class MainForm extends javax.swing.JFrame {
             sdhForm.setVisible(true);
         }
     }//GEN-LAST:event_btnSuaDonHangActionPerformed
+
+    private void btnTimTheoMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimTheoMaActionPerformed
+        // TODO add your handling code here:
+        String ma = txtTimMa.getText().trim();
+        if (!ma.equals("")){
+           boolean pass = true;
+            int MaDH = 0;
+            try{
+                MaDH = Integer.parseInt(ma);
+            }
+            catch(NumberFormatException ex){
+                pass = false;
+                JOptionPane.showMessageDialog(rootPane, "Mã đơn hàng không hợp lệ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+            if (pass){
+                BULDonHang bul = new BULDonHang();
+                List<DonHang> res = bul.layDonHangTheoMa(MaDH);
+                updateTableDonHangBySearch(res);
+            }
+        }
+        else{
+            updateTableDonHang();
+        }
+    }//GEN-LAST:event_btnTimTheoMaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1053,6 +1103,9 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JButton btnThemKhachHang;
     private javax.swing.JButton btnThemXe;
     private javax.swing.JButton btnThongKe;
+    private javax.swing.JButton btnTimTheoDiaDiem;
+    private javax.swing.JButton btnTimTheoMa;
+    private javax.swing.JButton btnTimTheoNgay;
     private javax.swing.JButton btnXe;
     private javax.swing.JButton btnXoaDonHang;
     private javax.swing.JButton btnXoaKhachHang;
@@ -1069,9 +1122,6 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1117,12 +1167,12 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField18;
     private javax.swing.JTextField jTextField19;
     private javax.swing.JTextField jTextField20;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JPanel panelDonHang;
     private javax.swing.JPanel panelKhachHang;
     private javax.swing.JPanel panelThongKe;
     private javax.swing.JPanel panelXe;
+    private javax.swing.JTextField txtTimDiaDiem;
+    private javax.swing.JTextField txtTimKiemNgay;
+    private javax.swing.JTextField txtTimMa;
     // End of variables declaration//GEN-END:variables
 }

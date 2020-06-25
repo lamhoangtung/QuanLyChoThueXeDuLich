@@ -51,7 +51,8 @@ public class DALDonHang {
     public List<DonHang> layDonHangTheoMa(int MaDonQ){
         try {
             List<DonHang> arr = new ArrayList<DonHang>();
-            String query = String.format("SELECT * FROM don_hang WHERE MaDon=%d", MaDonQ);
+            String query = String.format("SELECT * FROM don_hang WHERE MaDon LIKE '%%%d%%'", MaDonQ);
+            System.out.println(query);
             Connector.openConnection();
             Statement stmt = Connector.conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
